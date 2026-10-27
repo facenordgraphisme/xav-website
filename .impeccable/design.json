@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-27T00:00:00Z",
+  "title": "Design System: Activités Nature",
+  "extensions": {
+    "colorMeta": {
+      "sun": { "role": "primary", "displayName": "Embrun Sun", "canonical": "#f5c04a", "tonalRamp": ["#4a3a16", "#7b6025", "#ac8634", "#d8a941", "#f5c04a", "#f9d689", "#fbe6b7", "#fef6e4"] },
+      "sun-strong": { "role": "primary", "displayName": "Noon Sun", "canonical": "#ffcf5c" },
+      "lake": { "role": "secondary", "displayName": "Serre-Ponçon Lake", "canonical": "#3fb3ac", "tonalRamp": ["#133634", "#205a56", "#2c7d78", "#379e97", "#3fb3ac", "#82cec9", "#b2e1de", "#e2f4f3"] },
+      "lake-ink": { "role": "secondary", "displayName": "Deep Lake Ink", "canonical": "#0b2433" },
+      "ridge": { "role": "tertiary", "displayName": "Écrins Ridge", "canonical": "#8fb9cb", "tonalRamp": ["#2b383d", "#485d66", "#64828e", "#7ea3b3", "#8fb9cb", "#b6d2dd", "#d2e3ea", "#eef5f7"] },
+      "sky": { "role": "neutral", "displayName": "Alpine Sky", "canonical": "#cfe7f0", "tonalRamp": ["#3e4548", "#687478", "#91a2a8", "#b6cbd3", "#cfe7f0", "#e0eff5", "#ecf5f9", "#f8fbfd"] },
+      "paper": { "role": "neutral", "displayName": "Poster Paper", "canonical": "#f3f9fb", "tonalRamp": ["#494b4b", "#7a7d7e", "#aaaeb0", "#d6dbdd", "#f3f9fb", "#f7fbfc", "#fafdfd", "#fdfefe"] },
+      "night": { "role": "neutral", "displayName": "Navy Ink", "canonical": "#0d2b3e", "tonalRamp": ["#040d13", "#07161f", "#091e2b", "#0b2637", "#0d2b3e", "#627582", "#9eaab2", "#dbdfe2"] },
+      "sky-ink": { "role": "neutral", "displayName": "Navy Ink", "canonical": "#0d2b3e" },
+      "paper-ink": { "role": "neutral", "displayName": "Navy Ink", "canonical": "#0d2b3e" },
+      "sun-ink": { "role": "neutral", "displayName": "Navy Ink", "canonical": "#0d2b3e" },
+      "night-ink": { "role": "neutral", "displayName": "Pale Sky Ink", "canonical": "#dff0f6" },
+      "soft": { "role": "neutral", "displayName": "Soft Slate", "canonical": "#3d5a6b", "tonalRamp": ["#121b20", "#1f2d36", "#2b3f4b", "#364f5e", "#3d5a6b", "#81949f", "#b1bdc4", "#e2e6e9"] },
+      "error": { "role": "neutral", "displayName": "Signal Red", "canonical": "#b3261e", "tonalRamp": ["#360b09", "#5a130f", "#7d1b15", "#9e211a", "#b3261e", "#ce726d", "#e1a8a5", "#f4dedd"] },
+      "night-sky": { "role": "neutral", "displayName": "Night Sky (dark theme --sky)", "canonical": "#0e2433" },
+      "night-sky-ink": { "role": "neutral", "displayName": "Night Pale Ink (dark theme --sky-ink, --paper-ink, --night-ink)", "canonical": "#d6ebf3" },
+      "night-ridge": { "role": "tertiary", "displayName": "Night Ridge (dark theme --ridge)", "canonical": "#1c3c50" },
+      "night-lake": { "role": "secondary", "displayName": "Night Lake (dark theme --lake)", "canonical": "#0e5455" },
+      "night-lake-ink": { "role": "secondary", "displayName": "Night Lake Ink (dark theme --lake-ink)", "canonical": "#e3f5f3" },
+      "night-sun": { "role": "neutral", "displayName": "Night Sun Field (dark theme --sun; ink becomes #f5c04a)", "canonical": "#163248" },
+      "night-paper": { "role": "neutral", "displayName": "Night Paper (dark theme --paper)", "canonical": "#0a1a24" },
+      "night-night": { "role": "neutral", "displayName": "Deep Night (dark theme --night)", "canonical": "#05121a" },
+      "night-soft": { "role": "neutral", "displayName": "Night Soft Slate (dark theme --soft)", "canonical": "#9bb7c6" },
+      "night-error": { "role": "neutral", "displayName": "Night Signal Red (dark theme --error)", "canonical": "#ff8a80" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Poster title. Hero h1 (own clamp 56px-10.6vw-204px, uppercase, 112% wide) and the contact e-mail (weight 500, normal width)." },
+      "headline": { "displayName": "Headline", "purpose": "Section heads, ticket title and price, mobile menu links; 900 at 112% width." },
+      "title": { "displayName": "Title", "purpose": "Card titles and footer links (112% wide), fact values, gallery count." },
+      "lead": { "displayName": "Lead", "purpose": "Ledes, ritual text, FAQ questions, stepper count." },
+      "body": { "displayName": "Body", "purpose": "Running text, measures 32-62ch." },
+      "label": { "displayName": "Label", "purpose": "Fact labels, form labels, nav, captions, legal. Sentence case, no tracking." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "UI state changes, press, hover, nav underline." },
+      { "name": "ease-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Arrivals: hero title lines, picture settle and map fade-in, entrances." },
+      { "name": "ease-in-out", "value": "cubic-bezier(0.76, 0, 0.24, 1)", "purpose": "Mobile menu panel clip-in." },
+      { "name": "t-press", "value": "140ms", "purpose": "Press feedback: buttons scale 0.97, tools 0.94, stepper 0.9." },
+      { "name": "t-hover", "value": "180ms", "purpose": "Colour changes on hover." },
+      { "name": "t-ui", "value": "240ms", "purpose": "Chevrons, underlines, accordion height, footer link slide." },
+      { "name": "hero-window", "value": "GSAP ScrollTrigger scrub, clip-path from the 4:5 window to inset(0), over 0.95 viewport while the stage is pinned", "purpose": "The poster window opens to full-bleed." },
+      { "name": "entrance", "value": "opacity 0 + translateY(24px) to rest, 0.9s expo.out, stagger 0.08s, once at top 86%", "purpose": "Parts of a group arrive in reading order." },
+      { "name": "shutter", "value": "clip-path inset(0 0 100% 0) to inset(0), 1.2s power4.inOut; image scale 1.12 to 1 over 1.6s", "purpose": "Photographs open from the lower edge." },
+      { "name": "drift", "value": "yPercent -4 to 3, scrubbed across the frame's pass", "purpose": "Large photographs travel inside their frames." },
+      { "name": "reduced-motion", "value": "all transitions and animations 1ms; hero unpinned; no Lenis; no entrances", "purpose": "Content is in place without motion." }
+    ],
+    "breakpoints": [
+      { "name": "ritual-stack", "value": "760px" },
+      { "name": "single-column", "value": "860px" },
+      { "name": "menu", "value": "960px" },
+      { "name": "card-below-photo", "value": "1100px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Sun Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The action: solid sun rectangle, navy ink, presses in.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Réserver une sortie <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 24px; background: var(--accent, #f5c04a); color: var(--accent-ink, #0d2b3e); font-family: var(--font, Archivo, system-ui, sans-serif); font-weight: 800; font-size: 17px; letter-spacing: -0.005em; text-decoration: none; border: 0; border-radius: 0; cursor: pointer; transition: transform 140ms cubic-bezier(0.22,1,0.36,1), background-color 180ms ease; } .ds-btn svg { width: 18px; height: 18px; transition: transform 240ms cubic-bezier(0.22,1,0.36,1); } .ds-btn:hover { background: var(--accent-strong, #ffcf5c); } .ds-btn:hover svg { transform: translateX(3px); } .ds-btn:focus-visible { outline: 3px solid var(--focus, #0d2b3e); outline-offset: 3px; } .ds-btn:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Ink Button",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "Secondary action on light fields; flips to sun on hover.",
+      "html": "<a class=\"ds-btn-ink\" href=\"#\">Envoyer sur WhatsApp</a>",
+      "css": ".ds-btn-ink { display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; background: var(--night, #0d2b3e); color: var(--night-ink, #dff0f6); font-family: var(--font, Archivo, system-ui, sans-serif); font-weight: 800; font-size: 17px; text-decoration: none; border-radius: 0; transition: transform 140ms cubic-bezier(0.22,1,0.36,1), background-color 180ms ease, color 180ms ease; } .ds-btn-ink:hover { background: var(--accent, #f5c04a); color: var(--accent-ink, #0d2b3e); } .ds-btn-ink:focus-visible { outline: 3px solid var(--focus, #0d2b3e); outline-offset: 3px; } .ds-btn-ink:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Choice Chips",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Activity choice on the ticket: sky chips, selected turns night.",
+      "html": "<div class=\"ds-choices\"><label class=\"ds-choice\"><input type=\"radio\" name=\"a\" checked><span>Rafting</span></label><label class=\"ds-choice\"><input type=\"radio\" name=\"a\"><span>Couleau</span></label><label class=\"ds-choice\"><input type=\"radio\" name=\"a\"><span>Fournel</span></label></div>",
+      "css": ".ds-choices { display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--font, Archivo, system-ui, sans-serif); } .ds-choice { position: relative; } .ds-choice input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; } .ds-choice span { display: inline-flex; align-items: center; min-height: 48px; padding: 0 18px; background: var(--sky, #cfe7f0); color: var(--sky-ink, #0d2b3e); font-weight: 700; transition: background-color 180ms ease, color 180ms ease, transform 140ms cubic-bezier(0.22,1,0.36,1); } .ds-choice input:checked + span { background: var(--chip-on, #0d2b3e); color: var(--chip-on-ink, #dff0f6); } .ds-choice input:focus-visible + span { outline: 3px solid var(--focus, #0d2b3e); outline-offset: 3px; } .ds-choice:active span { transform: scale(0.97); }"
+    },
+    {
+      "name": "Field Input and Stepper",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Sky-filled square input and the group-size stepper.",
+      "html": "<div class=\"ds-row\"><label class=\"ds-field\"><span>Date souhaitée</span><input class=\"ds-input\" type=\"text\" placeholder=\"jj/mm/aaaa\"></label><div class=\"ds-field\"><span>Personnes</span><div class=\"ds-stepper\"><button type=\"button\" aria-label=\"Moins\"><svg viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2.5\"><path d=\"M5 12h14\"/></svg></button><output>4</output><button type=\"button\" aria-label=\"Plus\"><svg viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2.5\"><path d=\"M5 12h14M12 5v14\"/></svg></button></div></div></div>",
+      "css": ".ds-row { display: flex; gap: 20px; flex-wrap: wrap; font-family: var(--font, Archivo, system-ui, sans-serif); color: var(--paper-ink, #0d2b3e); } .ds-field { display: grid; gap: 8px; } .ds-field > span { font-size: 15px; font-weight: 700; } .ds-input { min-height: 52px; padding: 0 16px; font: inherit; font-size: 17px; font-weight: 600; background: var(--sky, #cfe7f0); color: var(--sky-ink, #0d2b3e); border: 0; border-radius: 0; } .ds-input::placeholder { color: color-mix(in srgb, var(--sky-ink, #0d2b3e) 55%, transparent); } .ds-input:focus-visible { outline: 3px solid var(--focus, #0d2b3e); outline-offset: 3px; } .ds-stepper { display: flex; align-items: center; justify-content: space-between; height: 52px; min-width: 156px; background: var(--sky, #cfe7f0); color: var(--sky-ink, #0d2b3e); } .ds-stepper button { display: grid; width: 52px; height: 52px; border: 0; background: transparent; color: inherit; cursor: pointer; transition: transform 140ms cubic-bezier(0.22,1,0.36,1); } .ds-stepper button svg { width: 20px; height: 20px; margin: auto; fill: none; } .ds-stepper button:active { transform: scale(0.9); } .ds-stepper button:focus-visible { outline: 3px solid var(--focus, #0d2b3e); outline-offset: 3px; } .ds-stepper output { min-width: 3ch; text-align: center; font-size: 20px; font-weight: 900; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Outing Card",
+      "kind": "card",
+      "refersTo": "card-outing",
+      "description": "Night card with fixed slots, one safety line and a full-width sun button.",
+      "html": "<article class=\"ds-card\"><h3>Rafting sur la Durance</h3><p class=\"ds-card-place\">Embrun · Durance</p><dl class=\"ds-slots\"><dt>Durée</dt><dd>2 h 30</dd><dt>Âge</dt><dd>dès 7 ans</dd><dt>Prix</dt><dd>45 €</dd></dl><p>Une descente vive, adaptée au groupe.</p><p class=\"ds-card-safety\">Briefing et équipement complet fournis.</p><a class=\"ds-card-btn\" href=\"#\">Réserver cette sortie</a></article>",
+      "css": ".ds-card { max-width: 360px; background: var(--night, #0d2b3e); color: var(--night-ink, #dff0f6); padding: 28px; display: flex; flex-direction: column; gap: 14px; font-family: var(--font, Archivo, system-ui, sans-serif); font-size: 17px; line-height: 1.5; } .ds-card h3 { margin: 0; font-size: 30px; font-weight: 900; font-stretch: 112%; letter-spacing: -0.03em; line-height: 1; } .ds-card p { margin: 0; } .ds-card-place { font-weight: 600; margin-top: -6px !important; opacity: 0.8; } .ds-slots { display: grid; grid-template-columns: repeat(3, auto); justify-content: space-between; gap: 0 14px; margin: 0; font-variant-numeric: tabular-nums; } .ds-slots dt { grid-row: 1; font-size: 15px; font-weight: 600; opacity: 0.78; } .ds-slots dd { grid-row: 2; margin: 0; font-size: 20px; font-weight: 900; white-space: nowrap; } .ds-card-safety { position: relative; padding-left: 16px; font-size: 15px; } .ds-card-safety::before { content: \"\"; position: absolute; left: 0; top: 0.45em; width: 7px; height: 7px; background: var(--accent, #f5c04a); } .ds-card-btn { display: flex; align-items: center; justify-content: center; min-height: 52px; margin-top: 6px; background: var(--accent, #f5c04a); color: var(--accent-ink, #0d2b3e); font-weight: 800; text-decoration: none; transition: background-color 180ms ease, transform 140ms cubic-bezier(0.22,1,0.36,1); } .ds-card-btn:hover { background: var(--accent-strong, #ffcf5c); } .ds-card-btn:focus-visible { outline: 3px solid var(--focus, #0d2b3e); outline-offset: 3px; } .ds-card-btn:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Booking Ticket",
+      "kind": "custom",
+      "refersTo": "ticket",
+      "description": "Paper body and sun stub on a coloured field, meeting the section above at a straight edge.",
+      "html": "<div class=\"ds-ticket-wrap\"><svg class=\"ds-seam\" viewBox=\"0 0 1440 150\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M0 150V96l70-22 58 26 86-56 54 30 40-18 92 70 74-44 46 18 108-92 62 46 38-20 70 58 80-40 58 26 92-74 56 40 46-14 96 66 64-34 50 22 100-14V150Z\"/></svg><div class=\"ds-ticket\"><div class=\"ds-ticket-main\"><h2>Votre sortie</h2><p>Choisissez la sortie, la date et le nombre de personnes.</p></div><div class=\"ds-ticket-stub\"><span class=\"ds-price\">90 €</span><span>Rafting · 2 personnes</span><a href=\"#\">Envoyer la demande</a></div></div></div>",
+      "css": ".ds-ticket-wrap { position: relative; background: var(--lake, #3fb3ac); padding: 64px 24px; margin-top: 60px; font-family: var(--font, Archivo, system-ui, sans-serif); } .ds-seam { position: absolute; left: 0; right: 0; bottom: calc(100% - 1px); width: 100%; height: 60px; fill: var(--lake, #3fb3ac); } .ds-ticket { display: grid; grid-template-columns: 7fr 3fr; background: var(--paper, #f3f9fb); color: var(--paper-ink, #0d2b3e); } .ds-ticket-main { padding: 32px; display: grid; gap: 14px; } .ds-ticket-main h2 { margin: 0; font-size: 44px; font-weight: 900; font-stretch: 112%; letter-spacing: -0.03em; line-height: 0.95; } .ds-ticket-main p { margin: 0; font-size: 20px; line-height: 1.42; font-weight: 500; } .ds-ticket-stub { background: var(--sun, #f5c04a); color: var(--sun-ink, #0d2b3e); padding: 32px 24px; display: flex; flex-direction: column; gap: 10px; font-weight: 700; } .ds-price { font-size: 44px; font-weight: 900; font-stretch: 112%; letter-spacing: -0.035em; line-height: 0.9; font-variant-numeric: tabular-nums; } .ds-ticket-stub a { margin-top: 16px; display: flex; justify-content: center; align-items: center; min-height: 52px; background: var(--night, #0d2b3e); color: var(--night-ink, #dff0f6); text-decoration: none; font-weight: 800; transition: background-color 180ms ease, color 180ms ease; } .ds-ticket-stub a:hover { background: var(--paper, #f3f9fb); color: var(--paper-ink, #0d2b3e); } .ds-ticket-stub a:focus-visible { outline: 3px solid var(--focus, #0d2b3e); outline-offset: 3px; } @media (max-width: 600px) { .ds-ticket { grid-template-columns: 1fr; } }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "",
+      "description": "Sticky sky bar: wordmark, links with a drawn underline, compact sun button.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-brand\" href=\"#\">Activités Nature</a><nav><a href=\"#\" aria-current=\"page\">Rafting</a><a href=\"#\">Canyoning</a><a href=\"#\">Les guides</a><a href=\"#\">Tarifs</a></nav><a class=\"ds-nav-cta\" href=\"#\">Réserver</a></header>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 24px; height: 68px; padding: 0 24px; background: var(--sky, #cfe7f0); color: var(--sky-ink, #0d2b3e); font-family: var(--font, Archivo, system-ui, sans-serif); } .ds-brand { margin-right: auto; font-weight: 800; font-size: 17px; letter-spacing: -0.01em; text-decoration: none; color: inherit; } .ds-nav nav { display: flex; gap: 24px; font-size: 15px; font-weight: 600; } .ds-nav nav a { position: relative; padding-block: 8px; text-decoration: none; color: inherit; } .ds-nav nav a::after { content: \"\"; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 240ms cubic-bezier(0.22,1,0.36,1); } .ds-nav nav a:hover::after, .ds-nav nav a[aria-current=\"page\"]::after { transform: none; } .ds-nav a:focus-visible { outline: 3px solid var(--focus, #0d2b3e); outline-offset: 3px; } .ds-nav-cta { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; background: var(--accent, #f5c04a); color: var(--accent-ink, #0d2b3e); font-size: 15px; font-weight: 800; text-decoration: none; transition: background-color 180ms ease; } .ds-nav-cta:hover { background: var(--accent-strong, #ffcf5c); }"
+    },
+    {
+      "name": "Gallery Frame",
+      "kind": "custom",
+      "refersTo": "gallery-control",
+      "description": "One 4:5 frame on lake, count, caption and two square night controls.",
+      "html": "<figure class=\"ds-gallery\"><div class=\"ds-frame\"></div><div class=\"ds-gnav\"><p class=\"ds-count\"><strong>1</strong> sur 6</p><p class=\"ds-caption\">Le Couleau, premier saut.</p><div class=\"ds-gbtns\"><button type=\"button\" aria-label=\"Précédente\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\"><path d=\"M20 12H5M11 6l-6 6 6 6\"/></svg></button><button type=\"button\" aria-label=\"Suivante\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></button></div></div></figure>",
+      "css": ".ds-gallery { margin: 0; width: 280px; font-family: var(--font, Archivo, system-ui, sans-serif); color: var(--paper-ink, #0d2b3e); } .ds-frame { aspect-ratio: 4 / 5; background: var(--lake, #3fb3ac); } .ds-gnav { display: grid; gap: 10px; margin-top: 16px; } .ds-gnav p { margin: 0; } .ds-count { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; } .ds-count strong { font-weight: 900; } .ds-caption { font-size: 15px; font-weight: 600; } .ds-gbtns { display: flex; gap: 8px; } .ds-gbtns button { width: 52px; height: 52px; display: grid; place-items: center; border: 0; border-radius: 0; cursor: pointer; background: var(--night, #0d2b3e); color: var(--night-ink, #dff0f6); transition: transform 140ms cubic-bezier(0.22,1,0.36,1), background-color 180ms ease; } .ds-gbtns svg { width: 20px; height: 20px; } .ds-gbtns button:hover { background: var(--paper, #f3f9fb); color: var(--paper-ink, #0d2b3e); } .ds-gbtns button:focus-visible { outline: 3px solid var(--focus, #0d2b3e); outline-offset: 3px; } .ds-gbtns button:active { transform: scale(0.94); }"
+    },
+    {
+      "name": "FAQ Accordion",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Native details, lead-size questions, drawn chevron, no dividers.",
+      "html": "<div class=\"ds-qa\"><details open><summary>Faut-il savoir nager ?</summary><p>Oui, savoir nager est demandé. Le gilet et le casque sont fournis.</p></details><details><summary>À partir de quel âge ?</summary><p>Dès 7 ans pour le rafting et le Couleau, dès 12 ans pour le Fournel.</p></details></div>",
+      "css": ".ds-qa { display: grid; gap: 4px; max-width: 520px; font-family: var(--font, Archivo, system-ui, sans-serif); color: var(--paper-ink, #0d2b3e); } .ds-qa details { padding-block: 10px; } .ds-qa summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; } .ds-qa summary::-webkit-details-marker { display: none; } .ds-qa summary::after { content: \"\"; flex: none; width: 10px; height: 10px; border-right: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: translateY(-3px) rotate(45deg); transition: transform 240ms cubic-bezier(0.22,1,0.36,1); } .ds-qa details[open] summary::after { transform: translateY(2px) rotate(-135deg); } .ds-qa summary:focus-visible { outline: 3px solid var(--focus, #0d2b3e); outline-offset: 3px; } .ds-qa p { margin: 0; padding-top: 6px; line-height: 1.55; color: var(--soft, #3d5a6b); max-width: 52ch; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Pinned Travel Poster",
+    "overview": "The site is a vintage Hautes-Alpes travel poster that keeps going as you scroll. Every section stands on a flat field of local colour: the pale sky, the blue-grey ridge of the Écrins, the turquoise of Serre-Ponçon, the yellow of the Embrun sun. One navy ink prints on all of them. Photographs are the client's own outings, set into the fields as windows, columns and halves, never tinted or framed with ornament.\n\nDensity is low and the scale is loud: poster titles in wide black Archivo hold the page, and everything else is set at normal width in a short six-step ramp. Depth comes from field changes and from photographs, not from light; there are no shadows, no gradients and no lines. The one drawn shape is the Écrins ridge silhouette, which closes the hero, seams the ticket into the page and sits at the foot of each ritual field.\n\nNight mode is the same poster re-inked, not a different site: the fields drop to navy tones, the inks go pale, and the sun-yellow survives as the action colour and the ink of the former sun field.",
+    "keyCharacteristics": [
+      "Flat colour fields (sky, lake, sun, paper, night) carry whole sections, each with its paired ink.",
+      "One family, Archivo, with the width axis: 112% black for poster titles, 100% for everything else.",
+      "Square corners everywhere; flat fills; no shadow at rest, no gradient, no hairline.",
+      "The real contour map of the Embrun valley is the only drawn element: full in the hero, faint crops on ritual fields.",
+      "Sun-yellow is the action colour in both themes.",
+      "Motion is a poster coming to life: a window that opens, lines that rise, pictures that open like shutters."
+    ],
+    "rules": [
+      { "name": "The Field And Ink Rule", "body": "A surface is always one of the five fields with its own paired ink. Never set text colour independently of the field it sits on.", "section": "colors" },
+      { "name": "The Sun Is Action Rule", "body": "Sun-yellow marks the thing to press. A sun field may host a section, but nothing on a non-sun field is yellow unless it is clickable or the selection.", "section": "colors" },
+      { "name": "The Two Widths Rule", "body": "112% width is for poster titles only (display, headline, card and footer titles). Text, labels and numbers stay at 100%.", "section": "typography" },
+      { "name": "The Ritual Verb Exception", "body": "The ritual verbs (ENFILER, ÉCOUTER, DESCENDRE, SÉCHER) are uppercase black at normal width with tight tracking (-0.045em, line-height 0.84); they are the only uppercase outside the hero.", "section": "typography" },
+      { "name": "The Tabular Numbers Rule", "body": "Prices, slots and counts use tabular figures.", "section": "typography" },
+      { "name": "The Flat Poster Rule", "body": "Depth is overlap and field contrast. If something needs to stand forward, put it on a different field; never lift it with a shadow.", "section": "elevation" },
+      { "name": "The One Map Rule", "body": "The real valley map is the only illustration. No icons-as-decoration, no blobs, no wave dividers, no drawn mountain silhouettes.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do build every section on one field (sky, lake, sun, paper, night) with that field's ink.",
+      "Do make the thing to press a sun-yellow square rectangle with navy ink, 52px tall.",
+      "Do set poster titles in Archivo 900 at 112% width with tight negative tracking, and everything else at normal width.",
+      "Do let fields meet at straight edges; texture a colour panel only with a faint crop of the real map.",
+      "Do give outings fixed slots (duration, age, price) in the same order every time.",
+      "Do re-ink, not redesign, for night mode: same variables, same layout, sun stays the action.",
+      "Do honour reduced motion: content already in place, hero unpinned."
+    ],
+    "donts": [
+      "Don't use gradients, including on photo overlays.",
+      "Don't use shadows at rest or on hover; depth is overlap and field contrast.",
+      "Don't round any corner.",
+      "Don't draw hairlines, borders or dividers; separate with fields and space.",
+      "Don't put eyebrows or kickers above headings.",
+      "Don't number sections or items with index numerals (01, 02...). Counts like \"1 sur 6\" are fine.",
+      "Don't introduce a monospace or a second family.",
+      "Don't draw shapes other than the real map, and never bring back drawn mountain triangles."
+    ]
+  }
+}
