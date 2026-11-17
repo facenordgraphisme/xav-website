@@ -374,7 +374,7 @@ const SplitText = ({
             scrollTrigger:
               trigger === 'load'
                 ? undefined
-                : { trigger: el, start, once: true, fastScrollEnd: true, anticipatePin: 0.4 },
+                : { trigger: el, start, toggleActions: "play none none none", fastScrollEnd: true, anticipatePin: 0.4 },
             onComplete: () => {
               revealed = true;
               intro = null;

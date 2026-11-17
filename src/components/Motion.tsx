@@ -35,6 +35,8 @@ export function Motion() {
     if (reduced()) return;
     const ctx = gsap.context(() => {
       // Entrances: the parts of a group arrive in reading order, once.
+      // Play-only toggleActions rather than `once: true`: a once-trigger kills itself
+      // inside ScrollTrigger.refresh() and crashes GSAP 3.15 ("reading 'end'").
       const groups = new Map<Element, Element[]>();
       document.querySelectorAll("[data-reveal]").forEach((el) => {
         const group = el.closest("[data-reveal-group]") ?? el;
@@ -47,7 +49,7 @@ export function Motion() {
           duration: 0.9,
           ease: "expo.out",
           stagger: 0.08,
-          scrollTrigger: { trigger: group, start: "top 86%", once: true },
+          scrollTrigger: { trigger: group, start: "top 86%", toggleActions: "play none none none" },
         });
       });
 
@@ -55,7 +57,7 @@ export function Motion() {
       document.querySelectorAll<HTMLElement>("[data-shutter]").forEach((el) => {
         const img = el.querySelector("img");
         gsap
-          .timeline({ scrollTrigger: { trigger: el, start: "top 88%", once: true } })
+          .timeline({ scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" } })
           .to(el, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "power4.inOut" })
           .to(img, { scale: 1, duration: 1.6, ease: "power2.out" }, 0);
       });
