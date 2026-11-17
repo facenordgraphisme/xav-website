@@ -45,6 +45,24 @@ export const outing = defineType({
     defineField({ name: "name", title: "Nom", type: "localeString" }),
     defineField({ name: "short", title: "Nom court (formulaire)", type: "localeString" }),
     defineField({ name: "price", title: "Prix par personne (€)", type: "number", validation: (r) => r.min(0) }),
+    defineField({
+      name: "bookingUrl",
+      title: "Lien de réservation Outplanners",
+      description:
+        "Adresse de la page publique de cette activité sur Outplanners, ex. https://www.outplanners.com/r/activites-nature/rafting. Les boutons « Réserver » ouvrent alors la réservation en ligne par-dessus le site. Laisser vide pour garder la demande par WhatsApp ou e-mail.",
+      type: "url",
+      validation: (r) =>
+        r.uri({ scheme: ["https"] }).custom((value) => {
+          if (!value) return true;
+          try {
+            return /^\/r\/[^/]+\/[^/]+\/?$/.test(new URL(value).pathname)
+              ? true
+              : "Collez le lien d'une activité : il ressemble à https://www.outplanners.com/r/votre-structure/votre-activite";
+          } catch {
+            return "Lien invalide";
+          }
+        }),
+    }),
     defineField({ name: "photo", title: "Photo", type: "photo" }),
     defineField({ name: "place", title: "Lieu · niveau", type: "localeString" }),
     defineField({ name: "who", title: "Pour qui", type: "localeString", description: "Ex. Dès 7 ans" }),

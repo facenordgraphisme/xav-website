@@ -10,6 +10,8 @@ export type Facts = {
   groupSize: number;
   groupDiscount: number;
   prices: Record<OutingId, number>;
+  /** Outplanners public page of each outing, when online booking is set up in Sanity. */
+  booking: Partial<Record<OutingId, string>>;
 };
 
 export const unitPrice = (facts: Facts, id: OutingId, people: number) =>

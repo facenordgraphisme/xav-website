@@ -604,3 +604,36 @@ html.menu-open { overflow: clip; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: clip; }
+
+/* ---------- Online booking (Outplanners) over the page ---------- */
+html.booking-open { overflow: hidden; }
+.booking {
+  /* The booking page is always light: it keeps its own colours in both themes */
+  width: min(560px, 100% - 2 * var(--margin)); max-width: none;
+  height: min(860px, 100dvh - 2 * var(--margin)); max-height: none;
+  margin: auto; padding: 0; border: 0; background: #fff; color: #0f172a;
+  box-shadow: 0 24px 80px rgb(9 30 44 / 0.4);
+  overscroll-behavior: contain;
+}
+.booking::backdrop { background: var(--scrim); backdrop-filter: blur(2px); }
+.booking[open] { animation: booking-in var(--t-ui) var(--ease-out); }
+.booking[open]::backdrop { animation: booking-fade var(--t-ui) ease; }
+@keyframes booking-in { from { opacity: 0; transform: translateY(12px); } }
+@keyframes booking-fade { from { opacity: 0; } }
+.booking__frame { position: relative; width: 100%; height: 100%; }
+.booking__frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.booking__close {
+  position: absolute; top: 10px; right: 10px; z-index: 1;
+  display: grid; place-items: center; width: 44px; height: 44px;
+  border: 0; background: var(--night); color: var(--night-ink); cursor: pointer;
+  transition: transform var(--t-press) var(--ease-out);
+}
+.booking__close:active { transform: scale(0.94); }
+.booking__close svg { width: 18px; height: 18px; }
+.booking__close:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 560px) {
+  .booking { width: 100%; height: 100dvh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .booking[open], .booking[open]::backdrop { animation: none; }
+}

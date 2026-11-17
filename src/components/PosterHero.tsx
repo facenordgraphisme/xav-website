@@ -13,7 +13,8 @@ type Props = {
   sub: string;
   lede: string;
   facts: { label: string; value: string }[];
-  cta: { label: string; href: string };
+  /** `outplanners`: the link opens online booking over the page (see BookingDialog). */
+  cta: { label: string; href: string; outplanners?: boolean };
   phone: { label: string; href: string };
   photo: { src: string; alt: string; position?: string; ratio?: number };
 };
@@ -168,7 +169,7 @@ export function PosterHero({ title, sub, lede, facts, cta, phone, photo }: Props
               ))}
             </dl>
             <div className="hero__actions" data-load style={{ "--d": "540ms" } as React.CSSProperties}>
-              <a className="btn" href={cta.href}>
+              <a className="btn" href={cta.href} data-outplanners={cta.outplanners ? "" : undefined}>
                 {cta.label}
                 <Arrow />
               </a>

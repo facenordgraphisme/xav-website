@@ -35,7 +35,7 @@ type RawActivity = {
 } | null;
 type Raw = {
   settings: { phoneDisplay?: string; phoneIntl?: string; whatsapp?: string; email?: string; facebook?: string; addressLine1?: string; addressLine2?: string; groupSize?: number; groupDiscount?: number } | null;
-  outings: ({ _id: string; name?: L; short?: L; price?: number; photo?: RawPhoto; place?: L; who?: L; level?: L; where?: L; text?: L; safety?: L })[];
+  outings: ({ _id: string; name?: L; short?: L; price?: number; bookingUrl?: string; photo?: RawPhoto; place?: L; who?: L; level?: L; where?: L; text?: L; safety?: L })[];
   home: {
     metaTitle?: L; metaDescription?: L; heroTitle?: L; heroSub?: L; heroLede?: L; heroPhoto?: RawPhoto;
     outingsTitle?: L; outingsText?: L; ritual?: { verb?: L; text?: L; photo?: RawPhoto }[];
@@ -51,7 +51,7 @@ const PHOTO = `{ asset, crop, hotspot, alt, "dims": asset->metadata.dimensions{ 
 const ACTIVITY = `{ metaTitle, metaDescription, title, sub, lede, heroPhoto${PHOTO}, statement, text, detailPhotos[]${PHOTO}, ritualPhotos[]${PHOTO} }`;
 const QUERY = `{
   "settings": *[_id == "settings"][0],
-  "outings": *[_type == "outing" && _id in ["outing-rafting", "outing-couleau", "outing-fournel"]]{ _id, name, short, price, photo${PHOTO}, place, who, level, where, text, safety },
+  "outings": *[_type == "outing" && _id in ["outing-rafting", "outing-couleau", "outing-fournel"]]{ _id, name, short, price, bookingUrl, photo${PHOTO}, place, who, level, where, text, safety },
   "home": *[_id == "homePage"][0]{ ..., heroPhoto${PHOTO}, guidesPhoto${PHOTO}, ritual[]{ verb, text, photo${PHOTO} } },
   "rafting": *[_id == "raftingPage"][0]${ACTIVITY},
   "canyoning": *[_id == "canyoningPage"][0]${ACTIVITY},
@@ -146,6 +146,12 @@ export async function getSite(lang: Locale): Promise<Site> {
   };
   const groupSize = s?.groupSize ?? GROUP_SIZE;
   const groupDiscount = s?.groupDiscount ?? GROUP_DISCOUNT;
+  const booking = Object.fromEntries(
+    outingOrder.flatMap((id) => {
+      const url = byId(id)?.bookingUrl?.trim();
+      return url ? [[id, url]] : [];
+    }),
+  ) as Facts["booking"];
   const prices = Object.fromEntries(outingOrder.map((id) => [id, byId(id)?.price ?? localOutings[id].price])) as Record<OutingId, number>;
 
   const outings = Object.fromEntries(
@@ -242,7 +248,7 @@ export async function getSite(lang: Locale): Promise<Site> {
   return {
     lang,
     t,
-    facts: { contact, groupSize, groupDiscount, prices },
+    facts: { contact, groupSize, groupDiscount, prices, booking },
     photos: {
       outings: Object.fromEntries(
         outingOrder.map((id) => [id, photo(byId(id)?.photo, lang, { src: localOutings[id].photo, alt: outings[id].alt })]),

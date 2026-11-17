@@ -66,6 +66,9 @@ export function Ticket({ lang, t, facts, initial = "rafting", only }: { lang: Lo
     total,
     name: name.trim() ? fill(k.signed, { name: name.trim() }) : "",
   });
+  // With an Outplanners page, slot, deposit and confirmation happen there
+  const online = facts.booking[outing];
+  const terms = online ? k.onlineTerms : k.terms;
   const whatsapp = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(message)}`;
   const mail = `mailto:${contact.email}?subject=${encodeURIComponent(`${t.book} · ${t.outings[outing].name}`)}&body=${encodeURIComponent(message)}`;
 
@@ -78,7 +81,7 @@ export function Ticket({ lang, t, facts, initial = "rafting", only }: { lang: Lo
               {k.title}
             </h2>
             <p className="lead" style={{ maxWidth: "46ch" }} data-reveal>
-              {k.intro}
+              {online ? k.introOnline : k.intro}
             </p>
           </div>
 
@@ -97,6 +100,7 @@ export function Ticket({ lang, t, facts, initial = "rafting", only }: { lang: Lo
           </fieldset>
 
           <div className="row2" data-reveal>
+            {!online && (
             <div className="field">
               <label htmlFor={`${uid}-date`}>{k.date}</label>
               <input
@@ -114,6 +118,7 @@ export function Ticket({ lang, t, facts, initial = "rafting", only }: { lang: Lo
                 {dateInvalid ? k.errorDate : k.dateHint}
               </span>
             </div>
+            )}
             <div className="field">
               <span id={`${uid}-people`} className="label">
                 {k.people}
@@ -132,6 +137,7 @@ export function Ticket({ lang, t, facts, initial = "rafting", only }: { lang: Lo
                 </button>
               </div>
             </div>
+            {!online && (
             <div className="field">
               <label htmlFor={`${uid}-name`}>{k.name}</label>
               <input
@@ -144,10 +150,11 @@ export function Ticket({ lang, t, facts, initial = "rafting", only }: { lang: Lo
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
+            )}
           </div>
 
           <ul className="ticket__terms ticket__terms--main" data-reveal>
-            {k.terms.map((term) => (
+            {terms.map((term) => (
               <li key={term}>{term}</li>
             ))}
           </ul>
@@ -165,20 +172,35 @@ export function Ticket({ lang, t, facts, initial = "rafting", only }: { lang: Lo
           </p>
           <p className="ticket__group">{people >= facts.groupSize ? k.groupApplied : fill(k.groupHint, { size: facts.groupSize, discount: facts.groupDiscount })}</p>
           <div className="ticket__actions">
-            <a className="btn btn--ink btn--block" href={whatsapp} target="_blank" rel="noreferrer">
-              {k.whatsapp}
-              <Arrow />
-            </a>
-            <a className="link" href={mail}>
-              {k.email}
-            </a>
+            {online ? (
+              <>
+                <a className="btn btn--ink btn--block" href={online} data-outplanners="">
+                  {k.online}
+                  <Arrow />
+                </a>
+                <p className="ticket__group">{k.onlineHint}</p>
+                <a className="link" href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noreferrer">
+                  {k.ask}
+                </a>
+              </>
+            ) : (
+              <>
+                <a className="btn btn--ink btn--block" href={whatsapp} target="_blank" rel="noreferrer">
+                  {k.whatsapp}
+                  <Arrow />
+                </a>
+                <a className="link" href={mail}>
+                  {k.email}
+                </a>
+              </>
+            )}
             <a className="link call" href={`tel:${contact.phoneIntl}`}>
               {fill(k.call, { phone: contact.phoneDisplay })}
             </a>
           </div>
           {/* On a phone the stub follows the form, so the terms close the ticket instead */}
           <ul className="ticket__terms ticket__terms--stub">
-            {k.terms.map((term) => (
+            {terms.map((term) => (
               <li key={term}>{term}</li>
             ))}
           </ul>

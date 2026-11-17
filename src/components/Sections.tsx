@@ -78,7 +78,8 @@ function OutingFrame({ id, site, position }: { id: OutingId; site: Site; positio
           <p className="card__safety" data-reveal>
             {o.safety}
           </p>
-          <a className="btn btn--block" href={`#reserver`} data-outing={id} data-reveal>
+          {/* Online booking when the outing has its Outplanners page, the request form otherwise */}
+          <a className="btn btn--block" href={site.facts.booking[id] ?? "#reserver"} data-outing={id} data-outplanners={site.facts.booking[id] ? "" : undefined} data-reveal>
             {t.bookThis}
             <Arrow />
           </a>

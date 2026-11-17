@@ -36,7 +36,7 @@ export default async function Rafting({ params }: PageProps<"/[lang]/rafting">) 
           { label: t.slots.who, value: t.outings.rafting.who },
           { label: t.slots.price, value: money(unitPrice(facts, "rafting", 1), lang) },
         ]}
-        cta={{ label: t.bookThis, href: "#reserver" }}
+        cta={{ label: t.bookThis, href: facts.booking.rafting ?? "#reserver", outplanners: Boolean(facts.booking.rafting) }}
         phone={{ label: `${t.hero.call} ${facts.contact.phoneDisplay}`, href: `tel:${facts.contact.phoneIntl}` }}
         photo={site.photos.rafting.hero}
       />

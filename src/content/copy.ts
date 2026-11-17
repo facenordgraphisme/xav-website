@@ -183,6 +183,20 @@ const fr = {
     anyDate: "date à convenir",
     people1: "personne",
     peopleN: "personnes",
+    online: "Voir les dates et réserver",
+    introOnline: "Choisissez la sortie et le nombre de personnes pour voir le prix, puis réservez votre créneau en ligne.",
+    onlineHint: "Choisissez votre créneau parmi les places encore libres, puis réservez en ligne.",
+    ask: "Une question ? Écrivez-nous sur WhatsApp",
+    onlineTerms: [
+      "Moniteur diplômé d'État",
+      "Matériel complet fourni",
+      "Places disponibles en temps réel",
+      "Réservation confirmée en ligne",
+    ],
+  },
+  booking: {
+    title: "Réservation en ligne",
+    close: "Fermer la réservation",
   },
   gallery: {
     title: "Cet été, à Embrun",
@@ -440,6 +454,20 @@ const en: Copy = {
     anyDate: "date to be agreed",
     people1: "person",
     peopleN: "people",
+    online: "See dates and book",
+    introOnline: "Pick the trip and the number of people to see the price, then book your slot online.",
+    onlineHint: "Pick your slot from the places still free, then book online.",
+    ask: "A question? Message us on WhatsApp",
+    onlineTerms: [
+      "State-certified instructor",
+      "All gear provided",
+      "Live availability",
+      "Booking confirmed online",
+    ],
+  },
+  booking: {
+    title: "Online booking",
+    close: "Close booking",
   },
   gallery: {
     title: "This summer in Embrun",

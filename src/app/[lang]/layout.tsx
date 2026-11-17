@@ -6,6 +6,7 @@ import { getSite } from "@/content/getSite";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Motion } from "@/components/Motion";
+import { BookingDialog } from "@/components/BookingDialog";
 import "../globals.css";
 
 const archivo = Archivo({
@@ -70,6 +71,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         <main id="contenu">{children}</main>
         <SiteFooter site={site} />
         <Motion />
+        <BookingDialog title={t.booking.title} close={t.booking.close} />
       </body>
     </html>
   );
