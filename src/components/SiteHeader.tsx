@@ -4,8 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { copy, type Locale } from "@/content/copy";
-import { contact } from "@/content/site";
+import type { Copy, Locale } from "@/content/copy";
 
 function currentTheme(): "light" | "dark" {
   const set = document.documentElement.getAttribute("data-theme");
@@ -39,8 +38,7 @@ export function ThemeToggle({ label }: { label: string }) {
   );
 }
 
-export function SiteHeader({ lang }: { lang: Locale }) {
-  const t = copy[lang].nav;
+export function SiteHeader({ lang, t, phone }: { lang: Locale; t: Copy["nav"]; phone: { display: string; intl: string } }) {
   const pathname = usePathname() || `/${lang}`;
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -142,8 +140,8 @@ export function SiteHeader({ lang }: { lang: Locale }) {
             {t.book}
           </a>
           <div className="tools">
-            <a className="tool" href={`tel:${contact.phoneIntl}`}>
-              {contact.phoneDisplay}
+            <a className="tool" href={`tel:${phone.intl}`}>
+              {phone.display}
             </a>
             <Link className="tool" href={switchHref} hrefLang={other}>
               {t.language}

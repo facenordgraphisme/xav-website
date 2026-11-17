@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo } from "next/font/google";
 import { notFound } from "next/navigation";
-import { copy, hasLocale, locales } from "@/content/copy";
+import { hasLocale, locales } from "@/content/copy";
+import { getSite } from "@/content/getSite";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Motion } from "@/components/Motion";
@@ -21,7 +22,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
-  const t = copy[lang].meta;
+  const site = await getSite(lang);
+  const t = site.t.meta;
   return {
     metadataBase: new URL("https://activites-nature.vercel.app"),
     title: t.title,
@@ -30,7 +32,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     openGraph: {
       title: t.title,
       description: t.description,
-      images: ["/images/rafting/rafting-07.jpg"],
+      images: [site.photos.home.hero.src.startsWith("/") ? "/images/rafting/rafting-07.jpg" : site.photos.home.hero.src],
       locale: lang === "fr" ? "fr_FR" : "en_GB",
       type: "website",
     },
@@ -51,7 +53,9 @@ const boot = `(function(){var d=document.documentElement;d.classList.add('js');t
 export default async function RootLayout({ children, params }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const t = copy[lang];
+  const site = await getSite(lang);
+  const { t } = site;
+  const { contact } = site.facts;
 
   return (
     <html lang={lang} className={archivo.variable} suppressHydrationWarning>
@@ -62,9 +66,9 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         <a className="skip" href="#contenu">
           {t.nav.skip}
         </a>
-        <SiteHeader lang={lang} />
+        <SiteHeader lang={lang} t={t.nav} phone={{ display: contact.phoneDisplay, intl: contact.phoneIntl }} />
         <main id="contenu">{children}</main>
-        <SiteFooter lang={lang} />
+        <SiteFooter site={site} />
         <Motion />
       </body>
     </html>

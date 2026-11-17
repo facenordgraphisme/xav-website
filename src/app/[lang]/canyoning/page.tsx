@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { copy, hasLocale } from "@/content/copy";
-import { contact, outings } from "@/content/site";
+import { hasLocale } from "@/content/copy";
+import { getSite } from "@/content/getSite";
+import { money } from "@/content/facts";
 import { PosterHero } from "@/components/PosterHero";
 import { Detail, Faq, Outings, Ritual } from "@/components/Sections";
 import { Ticket } from "@/components/Ticket";
@@ -9,7 +10,7 @@ import { Ticket } from "@/components/Ticket";
 export async function generateMetadata({ params }: PageProps<"/[lang]/canyoning">): Promise<Metadata> {
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
-  const t = copy[lang].meta;
+  const t = (await getSite(lang)).t.meta;
   return {
     title: t.canyoning,
     description: t.canyoningDesc,
@@ -20,10 +21,10 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/canyoning"
 export default async function Canyoning({ params }: PageProps<"/[lang]/canyoning">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const t = copy[lang];
+  const site = await getSite(lang);
+  const { t, facts } = site;
   const p = t.canyoningPage;
-  const from = Math.min(outings.couleau.price, outings.fournel.price);
-  const price = lang === "fr" ? `${from} €` : `€${from}`;
+  const price = money(Math.min(facts.prices.couleau, facts.prices.fournel), lang);
 
   return (
     <>
@@ -37,22 +38,14 @@ export default async function Canyoning({ params }: PageProps<"/[lang]/canyoning
           { label: t.slots.price, value: lang === "fr" ? `dès ${price}` : `from ${price}` },
         ]}
         cta={{ label: t.bookThis, href: "#reserver" }}
-        phone={{ label: `${t.hero.call} ${contact.phoneDisplay}`, href: `tel:${contact.phoneIntl}` }}
-        photo={{ src: "/images/canyoning/canyoning-04.jpg", alt: p.photoAlt, position: "50% 40%" }}
+        phone={{ label: `${t.hero.call} ${facts.contact.phoneDisplay}`, href: `tel:${facts.contact.phoneIntl}` }}
+        photo={site.photos.canyoning.hero}
       />
-      <Detail
-        title={t.nav.canyoning}
-        statement={p.statement}
-        text={p.text}
-        pics={[
-          { src: "/images/canyoning/canyoning-09.jpg", alt: t.gallery.photos[2].alt },
-          { src: "/images/canyoning/canyoning-11.jpg", alt: t.gallery.photos[4].alt },
-        ]}
-      />
-      <Outings lang={lang} only={["couleau", "fournel"]} />
-      <Ritual lang={lang} photos={t.canyonRitual} />
-      <Ticket lang={lang} initial="couleau" only={["couleau", "fournel"]} />
-      <Faq lang={lang} />
+      <Detail title={t.nav.canyoning} statement={p.statement} text={p.text} pics={site.photos.canyoning.detail} />
+      <Outings site={site} only={["couleau", "fournel"]} />
+      <Ritual site={site} photos={t.canyonRitual} />
+      <Ticket lang={lang} t={{ ticket: t.ticket, outings: t.outings, book: t.nav.book }} facts={facts} initial="couleau" only={["couleau", "fournel"]} />
+      <Faq site={site} />
     </>
   );
 }

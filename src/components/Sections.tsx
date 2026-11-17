@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { copy, type Locale } from "@/content/copy";
-import { contact, outingOrder, outings, unitPrice, type OutingId } from "@/content/site";
+import type { Site } from "@/content/getSite";
+import { money, unitPrice, type Photo } from "@/content/facts";
+import { outingOrder, type OutingId } from "@/content/site";
 import { Arrow } from "./PosterHero";
 import SplitText from "./SplitText";
 
@@ -8,8 +9,8 @@ const style = (vars: Record<string, string | number>) => vars as React.CSSProper
 
 /* ---------- Three outings: intro strip + one full-bleed frame each ---------- */
 
-export function Outings({ lang, only }: { lang: Locale; only?: OutingId[] }) {
-  const t = copy[lang];
+export function Outings({ site, only }: { site: Site; only?: OutingId[] }) {
+  const { t } = site;
   const ids = only ?? outingOrder;
   return (
     <section id="sorties" aria-labelledby="sorties-title">
@@ -31,22 +32,22 @@ export function Outings({ lang, only }: { lang: Locale; only?: OutingId[] }) {
         </h2>
       )}
       {ids.map((id, i) => (
-        <OutingFrame key={id} id={id} lang={lang} position={i} />
+        <OutingFrame key={id} id={id} site={site} position={i} />
       ))}
     </section>
   );
 }
 
-function OutingFrame({ id, lang, position }: { id: OutingId; lang: Locale; position: number }) {
-  const t = copy[lang];
+function OutingFrame({ id, site, position }: { id: OutingId; site: Site; position: number }) {
+  const { t } = site;
   const o = t.outings[id];
-  const data = outings[id];
-  const price = lang === "fr" ? `${unitPrice(id, 1)} €` : `€${unitPrice(id, 1)}`;
+  const pic = site.photos.outings[id];
+  const price = money(unitPrice(site.facts, id, 1), site.lang);
   return (
     <article className="showcase__frame" aria-labelledby={`o-${id}`}>
       <div className="showcase__media">
         <div className="showcase__bg" data-drift>
-          <Image src={data.photo} alt={o.alt} fill sizes="100vw" loading="eager" fetchPriority="low" style={{ objectFit: "cover" }} />
+          <Image src={pic.src} alt={pic.alt} fill sizes="100vw" loading="eager" fetchPriority="low" style={{ objectFit: "cover", objectPosition: pic.position }} />
         </div>
       </div>
       <div className="showcase__grid frame">
@@ -93,8 +94,8 @@ const FIELDS = ["sun", "lake", "sky", "sun"] as const;
 // Each step shows a different stretch of the real valley map
 const MAP_CROPS = ["12% 18%", "78% 64%", "40% 92%", "92% 10%"];
 
-export function Ritual({ lang, photos }: { lang: Locale; photos?: { src: string; alt: string; position?: string }[] }) {
-  const t = copy[lang].ritual;
+export function Ritual({ site, photos }: { site: Site; photos?: Photo[] }) {
+  const t = site.t.ritual;
   return (
     <section aria-labelledby="ritual-title">
       <h2 id="ritual-title" className="sr-only">
@@ -124,7 +125,7 @@ export function Ritual({ lang, photos }: { lang: Locale; photos?: { src: string;
               </div>
               <div className="ritual__photo">
                 {/* Eager but low priority: a fast scroll must never land on an empty panel */}
-                <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 760px) 100vw, 50vw" loading="eager" fetchPriority="low" style={{ objectPosition: "position" in photo ? photo.position : undefined }} />
+                <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 760px) 100vw, 50vw" loading="eager" fetchPriority="low" style={{ objectPosition: photo.position }} />
               </div>
             </li>
           );
@@ -136,8 +137,9 @@ export function Ritual({ lang, photos }: { lang: Locale; photos?: { src: string;
 
 /* ---------- Guides: wide photo, colour tile, facts ---------- */
 
-export function Guides({ lang }: { lang: Locale }) {
-  const t = copy[lang].guides;
+export function Guides({ site }: { site: Site }) {
+  const t = site.t.guides;
+  const guidesPhoto = site.photos.home.guides;
   return (
     <section id="guides" className="guides field-sky frame" aria-labelledby="guides-title">
       <div className="grid12" data-reveal-group>
@@ -149,7 +151,7 @@ export function Guides({ lang }: { lang: Locale }) {
         </p>
         <figure className="guides__photo">
           <div className="guides__img" data-shutter>
-            <Image src="/images/canyoning/canyoning-08.jpg" alt={t.photoAlt} fill sizes="(max-width: 860px) 100vw, 66vw" />
+            <Image src={guidesPhoto.src} alt={guidesPhoto.alt} fill sizes="(max-width: 860px) 100vw, 66vw" style={{ objectPosition: guidesPhoto.position }} />
           </div>
           <figcaption className="guides__note">{t.note}</figcaption>
         </figure>
@@ -176,8 +178,9 @@ export function Guides({ lang }: { lang: Locale }) {
 
 /* ---------- FAQ beside a tall photograph ---------- */
 
-export function Faq({ lang }: { lang: Locale }) {
-  const t = copy[lang].faq;
+export function Faq({ site }: { site: Site }) {
+  const t = site.t.faq;
+  const { contact } = site.facts;
   return (
     <section id="infos" className="faq field-sky frame" aria-labelledby="faq-title">
       <div className="grid12">

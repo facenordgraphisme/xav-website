@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { copy, type Locale } from "@/content/copy";
+import type { Copy } from "@/content/copy";
 
 const HOLD = 3200;
 
 /** One frame holds its place while its photographs change, with a visible count and controls. */
-export function Gallery({ lang }: { lang: Locale }) {
-  const t = copy[lang].gallery;
+export function Gallery({ t }: { t: Copy["gallery"] }) {
   const n = t.photos.length;
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);

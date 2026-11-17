@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { copy, type Locale } from "@/content/copy";
-import { contact } from "@/content/site";
+import type { Site } from "@/content/getSite";
 import SplitText from "./SplitText";
 
 /** One close: the e-mail set as display type on the sky, then photograph half, menu half on the sun. */
-export function SiteFooter({ lang }: { lang: Locale }) {
-  const t = copy[lang];
+export function SiteFooter({ site }: { site: Site }) {
+  const { t, lang } = site;
+  const { contact } = site.facts;
   const home = `/${lang}`;
   const [user, domain] = contact.email.split("@");
   const links = [

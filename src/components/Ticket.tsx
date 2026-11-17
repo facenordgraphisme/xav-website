@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useId, useState, useSyncExternalStore } from "react";
-import { copy, fill, type Locale } from "@/content/copy";
-import { contact, GROUP_SIZE, outingOrder, unitPrice, type OutingId } from "@/content/site";
+import { fill, type Copy, type Locale } from "@/content/copy";
+import { money as formatMoney, unitPrice as priceFor, type Facts } from "@/content/facts";
+import { outingOrder, type OutingId } from "@/content/site";
+
+export type TicketCopy = Pick<Copy, "ticket" | "outings"> & { book: string };
 import { Arrow } from "./PosterHero";
 
 // Season runs 1 April – 2 October. Off-season, the picker opens on next year's season.
@@ -27,8 +30,9 @@ function formatDate(iso: string, lang: Locale) {
   }).format(new Date(y, m - 1, d));
 }
 
-export function Ticket({ lang, initial = "rafting", only }: { lang: Locale; initial?: OutingId; only?: OutingId[] }) {
-  const t = copy[lang];
+export function Ticket({ lang, t, facts, initial = "rafting", only }: { lang: Locale; t: TicketCopy; facts: Facts; initial?: OutingId; only?: OutingId[] }) {
+  const { contact } = facts;
+  const unitPrice = (id: OutingId, n: number) => priceFor(facts, id, n);
   const k = t.ticket;
   const ids = only ?? outingOrder;
   const uid = useId();
@@ -52,7 +56,7 @@ export function Ticket({ lang, initial = "rafting", only }: { lang: Locale; init
 
   const unit = unitPrice(outing, people);
   const total = unit * people;
-  const money = (n: number) => (lang === "fr" ? `${n} €` : `€${n}`);
+  const money = (n: number) => formatMoney(n, lang);
   const dateInvalid = Boolean(date && min && max && (date < min || date > max));
 
   const message = fill(k.message, {
@@ -63,7 +67,7 @@ export function Ticket({ lang, initial = "rafting", only }: { lang: Locale; init
     name: name.trim() ? fill(k.signed, { name: name.trim() }) : "",
   });
   const whatsapp = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(message)}`;
-  const mail = `mailto:${contact.email}?subject=${encodeURIComponent(`${t.nav.book} · ${t.outings[outing].name}`)}&body=${encodeURIComponent(message)}`;
+  const mail = `mailto:${contact.email}?subject=${encodeURIComponent(`${t.book} · ${t.outings[outing].name}`)}&body=${encodeURIComponent(message)}`;
 
   return (
     <section id="reserver" className="ticket-section field-lake frame" aria-labelledby={`${uid}-title`}>
@@ -159,7 +163,7 @@ export function Ticket({ lang, initial = "rafting", only }: { lang: Locale; init
           <p className="ticket__sum num">
             {fill(k.each, { unit, n: people, people: people > 1 ? k.peopleN : k.people1 })}
           </p>
-          <p className="ticket__group">{people >= GROUP_SIZE ? k.groupApplied : k.groupHint}</p>
+          <p className="ticket__group">{people >= facts.groupSize ? k.groupApplied : fill(k.groupHint, { size: facts.groupSize, discount: facts.groupDiscount })}</p>
           <div className="ticket__actions">
             <a className="btn btn--ink btn--block" href={whatsapp} target="_blank" rel="noreferrer">
               {k.whatsapp}

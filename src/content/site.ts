@@ -1,4 +1,5 @@
-// Facts about the business. Prices are SAMPLES until Xavier and Patrick confirm them.
+// Local fallbacks for the business facts. Live values come from Sanity (see getSite.ts).
+// Prices are SAMPLES until Xavier and Patrick confirm them.
 
 export const contact = {
   phoneDisplay: "07 66 01 05 09",
@@ -21,9 +22,3 @@ export const outings: Record<OutingId, { price: number; photo: string }> = {
 };
 
 export const outingOrder: OutingId[] = ["rafting", "couleau", "fournel"];
-
-export const lowestPrice = Math.min(...outingOrder.map((id) => outings[id].price)) - GROUP_DISCOUNT;
-
-export function unitPrice(id: OutingId, people: number) {
-  return people >= GROUP_SIZE ? outings[id].price - GROUP_DISCOUNT : outings[id].price;
-}
