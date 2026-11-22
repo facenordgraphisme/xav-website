@@ -47,6 +47,9 @@ export function SiteHeader({ lang, t, phone }: { lang: Locale; t: Copy["nav"]; p
   const other: Locale = lang === "fr" ? "en" : "fr";
   const switchHref = pathname.replace(/^\/(fr|en)(?=\/|$)/, `/${other}`);
   const home = `/${lang}`;
+  // Only the home and activity pages carry the booking ticket; elsewhere the button goes home to it.
+  const hasTicket = pathname === home || /\/(rafting|canyoning)$/.test(pathname);
+  const bookHref = hasTicket ? "#reserver" : `${home}#reserver`;
   const links = [
     { href: `${home}/rafting`, label: t.rafting },
     { href: `${home}/canyoning`, label: t.canyoning },
@@ -93,7 +96,7 @@ export function SiteHeader({ lang, t, phone }: { lang: Locale; t: Copy["nav"]; p
           <span className="hide-sm">
             <ThemeToggle label={t.theme} />
           </span>
-          <a className="btn header-cta" href="#reserver">
+          <a className="btn header-cta" href={bookHref}>
             {t.book}
           </a>
           <button
@@ -136,7 +139,7 @@ export function SiteHeader({ lang, t, phone }: { lang: Locale; t: Copy["nav"]; p
           ))}
         </nav>
         <div className="menu-panel__foot">
-          <a className="btn btn--ink btn--block" href="#reserver" onClick={() => setOpen(false)}>
+          <a className="btn btn--ink btn--block" href={bookHref} onClick={() => setOpen(false)}>
             {t.book}
           </a>
           <div className="tools">

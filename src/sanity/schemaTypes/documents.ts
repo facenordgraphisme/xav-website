@@ -179,3 +179,27 @@ export const faq = defineType({
   ],
   preview: { prepare: () => ({ title: "Bon à savoir (FAQ)" }) },
 });
+
+export const legalPage = defineType({
+  name: "legalPage",
+  title: "Page légale",
+  type: "document",
+  fields: [
+    defineField({ name: "title", title: "Titre", type: "localeString" }),
+    defineField({ name: "description", title: "Description Google", type: "localeText" }),
+    defineField({
+      name: "updated",
+      title: "Dernière mise à jour",
+      type: "date",
+      description: "Affichée en haut de la page. À changer à chaque modification du texte.",
+      options: { dateFormat: "DD/MM/YYYY" },
+    }),
+    defineField({
+      name: "body",
+      title: "Texte",
+      type: "localeBlocks",
+      description: "Les passages « [À compléter : …] » s'affichent tels quels sur le site : remplacez-les avant la mise en ligne.",
+    }),
+  ],
+  preview: { select: { title: "title.fr", subtitle: "updated" } },
+});

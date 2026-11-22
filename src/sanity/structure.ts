@@ -22,4 +22,13 @@ export const structure: StructureResolver = (S) =>
       item(S, "canyoningPage"),
       item(S, "gallery"),
       item(S, "faq"),
+      S.divider(),
+      S.listItem()
+        .title("Pages légales")
+        .id("legal")
+        .child(
+          S.list()
+            .title("Pages légales")
+            .items([item(S, "legal-mentions"), item(S, "legal-privacy"), item(S, "legal-cookies"), item(S, "legal-terms")]),
+        ),
     ]);

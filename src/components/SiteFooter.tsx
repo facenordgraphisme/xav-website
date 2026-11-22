@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Site } from "@/content/getSite";
+import { legalIds, legalSlugs } from "@/content/legal";
 import SplitText from "./SplitText";
 
 /** One close: the e-mail set as display type on the sky, then photograph half, menu half on the sun. */
@@ -9,6 +10,9 @@ export function SiteFooter({ site }: { site: Site }) {
   const { contact } = site.facts;
   const home = `/${lang}`;
   const [user, domain] = contact.email.split("@");
+  const legalLabels = lang === "fr"
+    ? { mentions: "Mentions légales", privacy: "Confidentialité", cookies: "Cookies", terms: "CGV" }
+    : { mentions: "Legal notice", privacy: "Privacy", cookies: "Cookies", terms: "Terms of sale" };
   const links = [
     { href: `${home}/rafting`, label: t.nav.rafting },
     { href: `${home}/canyoning`, label: t.nav.canyoning },
@@ -94,6 +98,13 @@ export function SiteFooter({ site }: { site: Site }) {
             </div>
           </div>
           <div className="site-footer__legal">
+            <nav className="site-footer__legal-nav" aria-label={lang === "fr" ? "Informations légales" : "Legal information"}>
+              {legalIds.map((id) => (
+                <Link key={id} className="link" href={`${home}/${legalSlugs[id]}`}>
+                  {legalLabels[id]}
+                </Link>
+              ))}
+            </nav>
             <p>{t.footer.legal}</p>
             <p>{t.footer.credit}</p>
           </div>

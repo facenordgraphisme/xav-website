@@ -1,7 +1,7 @@
-import { fact, localeString, localeText, photo } from "./fields";
-import { activityPage, faq, gallery, homePage, outing, settings } from "./documents";
+import { fact, localeBlocks, localeString, localeText, photo } from "./fields";
+import { activityPage, faq, gallery, homePage, legalPage, outing, settings } from "./documents";
 
-export const schemaTypes = [localeString, localeText, photo, fact, settings, outing, homePage, activityPage, gallery, faq];
+export const schemaTypes = [localeString, localeText, localeBlocks, photo, fact, settings, outing, homePage, activityPage, gallery, faq, legalPage];
 
 /** Every document has a fixed id: editors fill them in, they never create or delete them. */
 export const fixedDocuments = [
@@ -14,4 +14,8 @@ export const fixedDocuments = [
   { id: "outing-fournel", type: "outing", title: "Sortie — Canyon du Fournel" },
   { id: "gallery", type: "gallery", title: "Galerie photo" },
   { id: "faq", type: "faq", title: "Bon à savoir (FAQ)" },
+  { id: "legal-mentions", type: "legalPage", title: "Mentions légales" },
+  { id: "legal-privacy", type: "legalPage", title: "Politique de confidentialité" },
+  { id: "legal-cookies", type: "legalPage", title: "Politique cookies" },
+  { id: "legal-terms", type: "legalPage", title: "Conditions générales de vente" },
 ] as const;

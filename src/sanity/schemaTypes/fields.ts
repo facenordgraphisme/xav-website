@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 /** Bilingual short text: one line in French, one in English. */
 export const localeString = defineType({
@@ -20,6 +20,59 @@ export const localeText = defineType({
   fields: [
     defineField({ name: "fr", title: "Français", type: "text", rows: 3 }),
     defineField({ name: "en", title: "English", type: "text", rows: 3 }),
+  ],
+});
+
+/** Formatted text for long pages: headings, paragraphs, bullet lists, bold, links. */
+const richText = (name: string, title: string, description?: string) =>
+  defineField({
+    name,
+    title,
+    description,
+    type: "array",
+    of: [
+      defineArrayMember({
+        type: "block",
+        styles: [
+          { title: "Paragraphe", value: "normal" },
+          { title: "Titre", value: "h2" },
+          { title: "Sous-titre", value: "h3" },
+        ],
+        lists: [{ title: "Liste à puces", value: "bullet" }],
+        marks: {
+          decorators: [
+            { title: "Gras", value: "strong" },
+            { title: "Italique", value: "em" },
+          ],
+          annotations: [
+            defineArrayMember({
+              name: "link",
+              title: "Lien",
+              type: "object",
+              fields: [
+                defineField({
+                  name: "href",
+                  title: "Adresse",
+                  type: "url",
+                  description: "Page du site (ex. /fr/cgv), site externe (https://…) ou e-mail (mailto:…).",
+                  validation: (r) => r.uri({ allowRelative: true, scheme: ["http", "https", "mailto", "tel"] }),
+                }),
+              ],
+            }),
+          ],
+        },
+      }),
+    ],
+  });
+
+/** Bilingual formatted text: one editor per language. */
+export const localeBlocks = defineType({
+  name: "localeBlocks",
+  title: "Texte mis en forme (FR / EN)",
+  type: "object",
+  fields: [
+    richText("fr", "Français"),
+    richText("en", "English", "Traduction : la version française fait foi."),
   ],
 });
 
