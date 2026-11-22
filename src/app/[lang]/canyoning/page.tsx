@@ -6,6 +6,8 @@ import { money } from "@/content/facts";
 import { PosterHero } from "@/components/PosterHero";
 import { Detail, Faq, Outings, Ritual } from "@/components/Sections";
 import { Ticket } from "@/components/Ticket";
+import { JsonLd } from "@/components/JsonLd";
+import { activitySchema } from "@/content/schema";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/canyoning">): Promise<Metadata> {
   const { lang } = await params;
@@ -14,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/canyoning"
   return {
     title: t.canyoning,
     description: t.canyoningDesc,
-    alternates: { canonical: `/${lang}/canyoning`, languages: { fr: "/fr/canyoning", en: "/en/canyoning" } },
+    alternates: { canonical: `/${lang}/canyoning`, languages: { fr: "/fr/canyoning", en: "/en/canyoning", "x-default": "/fr/canyoning" } },
   };
 }
 
@@ -28,6 +30,7 @@ export default async function Canyoning({ params }: PageProps<"/[lang]/canyoning
 
   return (
     <>
+      <JsonLd data={activitySchema(site, "canyoning")} />
       <PosterHero
         title={p.title}
         sub={p.sub}

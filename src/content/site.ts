@@ -1,6 +1,12 @@
 // Local fallbacks for the business facts. Live values come from Sanity (see getSite.ts).
 // Prices are SAMPLES until Xavier and Patrick confirm them.
 
+/**
+ * The address Google should index (canonical, sitemap, structured data). The domain
+ * is activités-nature.fr, written in its ASCII form: Vercel redirects the bare domain to www.
+ */
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.xn--activits-nature-hnb.fr").replace(/\/$/, "");
+
 export const contact = {
   phoneDisplay: "07 66 01 05 09",
   phoneIntl: "+33766010509",

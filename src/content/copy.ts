@@ -12,13 +12,13 @@ type Photo = { src: string; alt: string; position?: string };
 
 const fr = {
   meta: {
-    title: "Activités Nature · Rafting et canyoning à Embrun",
+    title: "Rafting à Embrun sur la Durance et canyoning · Activités Nature",
     description:
-      "Rafting sur la Durance et canyoning dans les Écrins avec Xavier et Patrick, moniteurs diplômés d'État. Demi-journée, matériel fourni, de début avril à début octobre.",
-    rafting: "Rafting sur la Durance à Embrun · Activités Nature",
+      "Rafting sur la Durance à Embrun et canyoning dans les Écrins avec Xavier et Patrick, moniteurs diplômés d'État. Demi-journée, matériel fourni, d'avril à octobre.",
+    rafting: "Rafting Embrun : descente de la Durance · Activités Nature",
     raftingDesc:
-      "Descente en raft de la Durance au pied d'Embrun, encadrée par un moniteur diplômé d'État. 2 h 30, sans expérience, matériel fourni.",
-    canyoning: "Canyoning dans les Écrins · Activités Nature",
+      "Rafting sur la Durance à Embrun (Hautes-Alpes) avec un moniteur diplômé d'État : 2 h 30 de rapides, sans expérience, matériel fourni. Familles, amis, EVJF et EVG.",
+    canyoning: "Canyoning près d'Embrun : Couleau et Fournel · Activités Nature",
     canyoningDesc:
       "Canyon du Couleau dès 7 ans, canyon du Fournel dès 12 ans : sauts, toboggans et rappels avec Xavier et Patrick.",
   },
@@ -288,13 +288,13 @@ export type Copy = typeof fr;
 
 const en: Copy = {
   meta: {
-    title: "Activités Nature · Rafting and canyoning in Embrun",
+    title: "Rafting in Embrun on the Durance and canyoning · Activités Nature",
     description:
-      "Rafting on the Durance and canyoning in the Écrins with Xavier and Patrick, state-certified instructors. Half-day trips, all gear included, from early April to early October.",
-    rafting: "Rafting on the Durance in Embrun · Activités Nature",
+      "Rafting on the Durance in Embrun and canyoning in the Écrins with Xavier and Patrick, state-certified instructors. Half-day trips, all gear included, April to October.",
+    rafting: "Rafting in Embrun on the Durance river · Activités Nature",
     raftingDesc:
-      "Raft down the Durance below Embrun with a state-certified instructor. 2.5 hours, no experience needed, all gear included.",
-    canyoning: "Canyoning in the Écrins · Activités Nature",
+      "Rafting on the Durance in Embrun (French Alps) with a state-certified instructor: 2.5 hours of rapids, no experience needed, all gear included. Families and groups.",
+    canyoning: "Canyoning near Embrun: Couleau and Fournel · Activités Nature",
     canyoningDesc:
       "Couleau canyon from age 7, Fournel canyon from age 12: jumps, natural slides and abseils with Xavier and Patrick.",
   },

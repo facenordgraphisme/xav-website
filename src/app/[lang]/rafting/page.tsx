@@ -6,6 +6,8 @@ import { money, unitPrice } from "@/content/facts";
 import { PosterHero } from "@/components/PosterHero";
 import { Detail, Faq, Outings } from "@/components/Sections";
 import { Ticket } from "@/components/Ticket";
+import { JsonLd } from "@/components/JsonLd";
+import { activitySchema } from "@/content/schema";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/rafting">): Promise<Metadata> {
   const { lang } = await params;
@@ -14,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/rafting">)
   return {
     title: t.rafting,
     description: t.raftingDesc,
-    alternates: { canonical: `/${lang}/rafting`, languages: { fr: "/fr/rafting", en: "/en/rafting" } },
+    alternates: { canonical: `/${lang}/rafting`, languages: { fr: "/fr/rafting", en: "/en/rafting", "x-default": "/fr/rafting" } },
   };
 }
 
@@ -27,6 +29,7 @@ export default async function Rafting({ params }: PageProps<"/[lang]/rafting">) 
 
   return (
     <>
+      <JsonLd data={activitySchema(site, "rafting")} />
       <PosterHero
         title={p.title}
         sub={p.sub}

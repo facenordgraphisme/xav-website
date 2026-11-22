@@ -254,6 +254,8 @@ html.menu-open { overflow: clip; }
   --pin-x: calc(50% + 93 * var(--k));
   --pin-y: calc(50% + 89 * var(--k));
   position: absolute; inset: 0; transform-origin: var(--pin-x) var(--pin-y);
+  /* Its own layer, drawn once: without it phones redraw the 288 KB contour mask on every scroll frame */
+  will-change: transform;
 }
 .hero__water, .hero__contours { position: absolute; inset: 0; mask: center / cover no-repeat; -webkit-mask: center / cover no-repeat; }
 .hero__water { background: var(--lake); mask-image: url(/images/lieu/courbes-lac.svg); -webkit-mask-image: url(/images/lieu/courbes-lac.svg); }

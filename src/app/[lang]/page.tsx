@@ -6,6 +6,8 @@ import { PosterHero } from "@/components/PosterHero";
 import { Faq, Guides, Outings, Ritual } from "@/components/Sections";
 import { Ticket } from "@/components/Ticket";
 import { Gallery } from "@/components/Gallery";
+import { JsonLd } from "@/components/JsonLd";
+import { faqSchema } from "@/content/schema";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -15,6 +17,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
+      <JsonLd data={faqSchema(site)} />
       <PosterHero
         title={t.hero.title}
         sub={t.hero.sub}

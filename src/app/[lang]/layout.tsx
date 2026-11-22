@@ -7,6 +7,9 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Motion } from "@/components/Motion";
 import { BookingDialog } from "@/components/BookingDialog";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE_URL } from "@/content/site";
+import { businessSchema } from "@/content/schema";
 import "../globals.css";
 
 const archivo = Archivo({
@@ -26,11 +29,12 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   const site = await getSite(lang);
   const t = site.t.meta;
   return {
-    metadataBase: new URL("https://activites-nature.vercel.app"),
+    metadataBase: new URL(SITE_URL),
     title: t.title,
     description: t.description,
-    alternates: { canonical: `/${lang}`, languages: { fr: "/fr", en: "/en" } },
+    alternates: { canonical: `/${lang}`, languages: { fr: "/fr", en: "/en", "x-default": "/fr" } },
     openGraph: {
+      siteName: "Activités Nature",
       title: t.title,
       description: t.description,
       images: [site.photos.home.hero.src.startsWith("/") ? "/images/rafting/rafting-07.jpg" : site.photos.home.hero.src],
@@ -62,6 +66,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
     <html lang={lang} className={archivo.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: boot }} />
+        <JsonLd data={businessSchema(site)} />
       </head>
       <body>
         <a className="skip" href="#contenu">
