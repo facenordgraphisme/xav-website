@@ -44,3 +44,6 @@ next-env.d.ts
 /.claude/
 /.impeccable/review/
 /.taste-skill/
+
+# Photos originales (très lourdes) : versions optimisées dans public/images
+/public/nouvelles images rafting/

@@ -94,7 +94,8 @@ function photo(raw: RawPhoto | undefined, lang: Locale, fallback: Photo, size?: 
   const clamp = (n: number) => Math.min(100, Math.max(0, n));
   const position = hs ? `${clamp(((hs.x - crop.left) / cw) * 100).toFixed(1)}% ${clamp(((hs.y - crop.top) / ch) * 100).toFixed(1)}%` : fallback.position;
   const ratio = raw.dims ? (raw.dims.width * cw) / (raw.dims.height * ch) : undefined;
-  return { src: base.width(2400).fit("max").url(), alt, position, ratio };
+  // Fits a 3600 × 2400 box: landscape photos stay sharp when the hero opens to a full phone screen
+  return { src: base.width(3600).height(2400).fit("max").url(), alt, position, ratio };
 }
 
 /** Uses the Sanity list when it has entries, the local one otherwise. */
@@ -106,9 +107,9 @@ const GALLERY = { w: 958 * 2, h: 1198 * 2 };
 
 /** Local defaults for photographs that live in components today. */
 const localPhotos = (t: Copy) => ({
-  homeHero: { src: "/images/rafting/rafting-01.jpg", alt: t.hero.photoAlt, position: "50% 62%" },
+  homeHero: { src: "/images/rafting/rafting-01.jpg", alt: t.hero.photoAlt, position: "45% 42%", ratio: 1.5 },
   guides: { src: "/images/canyoning/canyoning-08.jpg", alt: t.guides.photoAlt },
-  raftingHero: { src: "/images/rafting/rafting-02.jpg", alt: t.raftingPage.photoAlt, position: "50% 60%" },
+  raftingHero: { src: "/images/rafting/rafting-02.jpg", alt: t.raftingPage.photoAlt, position: "50% 45%", ratio: 1.5 },
   raftingDetail: [
     { src: "/images/rafting/rafting-12.jpg", alt: t.gallery.photos[1].alt },
     { src: "/images/rafting/rafting-14.jpg", alt: t.gallery.photos[3].alt },

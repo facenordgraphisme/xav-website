@@ -217,7 +217,7 @@ export function Faq({ site }: { site: Site }) {
         </div>
         <div className="faq__media">
           <div className="faq__tall" data-shutter>
-            <Image src="/images/rafting/rafting-11.jpg" alt={t.tallAlt} width={958} height={875} sizes="(max-width: 860px) 100vw, 50vw" />
+            <Image src="/images/rafting/rafting-11.jpg" alt={t.tallAlt} width={1600} height={2000} sizes="(max-width: 860px) 100vw, 50vw" />
           </div>
           <div className="faq__square">
             <Image src="/images/canyoning/canyoning-02.jpg" alt={t.squareAlt} width={1170} height={1463} sizes="(max-width: 860px) 40vw, 18vw" />

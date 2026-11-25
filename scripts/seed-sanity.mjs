@@ -105,7 +105,7 @@ const docs = [
     heroTitle: L(fr.hero.title, en.hero.title),
     heroSub: L(fr.hero.sub, en.hero.sub),
     heroLede: L(fr.hero.lede, en.hero.lede),
-    heroPhoto: await photo("/images/rafting/rafting-01.jpg", fr.hero.photoAlt, en.hero.photoAlt, "50% 62%"),
+    heroPhoto: await photo("/images/rafting/rafting-01.jpg", fr.hero.photoAlt, en.hero.photoAlt, "45% 42%"),
     outingsTitle: L(fr.outingsIntro.title, en.outingsIntro.title),
     outingsText: L(fr.outingsIntro.text, en.outingsIntro.text),
     ritual: await Promise.all(
@@ -128,7 +128,7 @@ const docs = [
     title: L(fr.raftingPage.title, en.raftingPage.title),
     sub: L(fr.raftingPage.sub, en.raftingPage.sub),
     lede: L(fr.raftingPage.lede, en.raftingPage.lede),
-    heroPhoto: await photo("/images/rafting/rafting-02.jpg", fr.raftingPage.photoAlt, en.raftingPage.photoAlt, "50% 60%"),
+    heroPhoto: await photo("/images/rafting/rafting-02.jpg", fr.raftingPage.photoAlt, en.raftingPage.photoAlt, "50% 45%"),
     statement: L(fr.raftingPage.statement, en.raftingPage.statement),
     text: L(fr.raftingPage.text, en.raftingPage.text),
     detailPhotos: [

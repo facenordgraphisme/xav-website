@@ -50,7 +50,7 @@ const fr = {
     ] as Fact[],
     cta: "Réserver une sortie",
     call: "Appeler",
-    photoAlt: "Un équipage en gilets rouges sur l'eau turquoise de la Durance, au pied des falaises",
+    photoAlt: "Un équipage en gilets rouges salue depuis son raft, sur l'eau turquoise de la Durance",
   },
   outingsIntro: {
     title: "Trois sorties au choix",
@@ -66,7 +66,7 @@ const fr = {
       who: "Familles",
       level: "Tous niveaux",
       where: "Embrun",
-      alt: "Un raft dans les rapides de la Durance, pagaies levées",
+      alt: "Un équipage lève les bras et les pagaies sur la Durance",
       thumbAlt: "Un groupe hilare dans son raft",
     },
     couleau: {
@@ -260,7 +260,7 @@ const fr = {
     follow: "Suivre",
     legal: "© 2026 Activités Nature · Rafting et canyoning entre Embrun et Serre-Ponçon",
     credit: "Photo du lac : « Lake of Serre-Ponçon from D900 2 » par kallerna, CC BY-SA 4.0, via Wikimedia Commons. Toutes les autres photos : Activités Nature. Relief de la carte : Terrain Tiles (Mapzen, AWS), dont EU-DEM, données Copernicus.",
-    photoAlt: "Deux pagayeurs à l'avant d'un raft, dans les rapides",
+    photoAlt: "Un raft dans les rapides de la Durance, le moniteur à l'arrière",
   },
   raftingPage: {
     title: "Rafting",
@@ -269,7 +269,7 @@ const fr = {
     statement:
       "Pas besoin d'expérience : on vous équipe, on vous explique, et on part.",
     text: "Le moniteur choisit le parcours selon votre groupe et barre le raft du début à la fin. Familles, amis, EVJF et EVG : tout le monde pagaie.",
-    photoAlt: "Un équipage prêt à partir, dans son raft sur la plage de galets",
+    photoAlt: "Un équipage pagaie dans les rapides de la Durance, entre les rochers",
   },
   canyoningPage: {
     title: "Canyons",
@@ -326,7 +326,7 @@ const en: Copy = {
     ],
     cta: "Book a trip",
     call: "Call",
-    photoAlt: "A crew in red life jackets on the turquoise Durance, below the cliffs",
+    photoAlt: "A crew in red life jackets waves from their raft on the turquoise Durance",
   },
   outingsIntro: {
     title: "Pick your trip",
@@ -342,7 +342,7 @@ const en: Copy = {
       who: "Families",
       level: "All levels",
       where: "Embrun",
-      alt: "A raft in the Durance rapids, paddles up",
+      alt: "A crew raises arms and paddles on the Durance",
       thumbAlt: "A laughing crew in their raft",
     },
     couleau: {
@@ -519,7 +519,7 @@ const en: Copy = {
     follow: "Follow",
     legal: "© 2026 Activités Nature · Rafting and canyoning between Embrun and Serre-Ponçon",
     credit: "Lake photo: “Lake of Serre-Ponçon from D900 2” by kallerna, CC BY-SA 4.0, via Wikimedia Commons. All other photos: Activités Nature. Map relief: Terrain Tiles (Mapzen, AWS), including EU-DEM, Copernicus data.",
-    photoAlt: "Two paddlers at the front of a raft in the rapids",
+    photoAlt: "A raft in the Durance rapids, the instructor at the back",
   },
   raftingPage: {
     title: "Rafting",
@@ -528,7 +528,7 @@ const en: Copy = {
     statement:
       "No experience needed: we kit you out, explain everything, and off we go.",
     text: "Your instructor picks the route for your group and steers the raft from start to finish. Families, friends, stag and hen parties: everyone paddles.",
-    photoAlt: "A crew ready to go, in their raft on the shingle beach",
+    photoAlt: "A crew paddles through the Durance rapids, between the rocks",
   },
   canyoningPage: {
     title: "Canyons",
