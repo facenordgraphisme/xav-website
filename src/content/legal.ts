@@ -60,7 +60,7 @@ Les textes, photographies, logo et la mise en page de ce site appartiennent à A
 Crédits :
 
 - Photo du lac de Serre-Ponçon : « Lake of Serre-Ponçon from D900 2 » par kallerna, licence [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr), via Wikimedia Commons.
-- Relief de la carte : Terrain Tiles (Mapzen, AWS), dont EU-DEM, données Copernicus.
+- Carte : relief Terrain Tiles (Mapzen, AWS), dont EU-DEM, données Copernicus ; lac et Durance © les contributeurs d'[OpenStreetMap](https://www.openstreetmap.org/copyright).
 - Toutes les autres photos : Activités Nature.
 
 ## Responsabilité
@@ -278,7 +278,7 @@ The texts, photographs, logo and layout of this website belong to Activités Nat
 Credits:
 
 - Photo of Lake Serre-Ponçon: "Lake of Serre-Ponçon from D900 2" by kallerna, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), via Wikimedia Commons.
-- Map relief: Terrain Tiles (Mapzen, AWS), including EU-DEM, Copernicus data.
+- Map: relief from Terrain Tiles (Mapzen, AWS), including EU-DEM, Copernicus data; lake and Durance © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors.
 - All other photos: Activités Nature.
 
 ## Liability

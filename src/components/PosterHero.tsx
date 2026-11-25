@@ -17,13 +17,15 @@ type Props = {
   cta: { label: string; href: string; outplanners?: boolean };
   phone: { label: string; href: string };
   photo: { src: string; alt: string; position?: string; ratio?: number };
+  /** Caption under the base's name on the map, e.g. "La base · Baratier". */
+  base: string;
 };
 
 /**
  * The poster: sky, ridge and lake as flat fields, the title as a monument, and one
  * photograph seen through a 4:5 window that opens to the whole screen on scroll.
  */
-export function PosterHero({ title, sub, lede, facts, cta, phone, photo }: Props) {
+export function PosterHero({ title, sub, lede, facts, cta, phone, photo, base }: Props) {
   const root = useRef<HTMLElement>(null);
   // Every hero photograph is a 1170 × 1463 portrait unless told otherwise
   const ratio = photo.ratio ?? 1170 / 1463;
@@ -107,7 +109,38 @@ export function PosterHero({ title, sub, lede, facts, cta, phone, photo }: Props
         tl.to(text, { yPercent: -6, opacity: 0, ease: "none", duration: 0.42 }, 0);
         // The map closes in on Baratier while the window opens
         tl.to(terrain, { scale: 1.12, ease: "none", duration: 1 }, 0);
-        return () => gsap.set([picture, shift, terrain], { clearProps: "clipPath,transform,inset,left,top,width,height" });
+
+        // The badge on the poster shrinks into its place in the header over three quarters of a screen.
+        // Both ends are fixed on screen (the stage is sticky, so is the header): measure once per refresh.
+        const badge = root.current!.querySelector<HTMLElement>(".hero__badge");
+        const slot = document.querySelector<HTMLElement>(".site-header .brand img");
+        if (badge && slot) {
+          const landing = () => {
+            const inline = badge.style.transform;
+            badge.style.transform = "none";
+            const from = badge.getBoundingClientRect();
+            badge.style.transform = inline;
+            const to = slot.getBoundingClientRect();
+            return {
+              x: to.left + to.width / 2 - (from.left + from.width / 2),
+              y: to.top + to.height / 2 - (from.top + from.height / 2),
+              scale: to.width / from.width,
+            };
+          };
+          gsap.fromTo(
+            badge,
+            { x: 0, y: 0, scale: 1, rotation: -8 },
+            {
+              x: () => landing().x,
+              y: () => landing().y,
+              scale: () => landing().scale,
+              rotation: 0,
+              ease: "power1.inOut",
+              scrollTrigger: { start: 0, end: () => window.innerHeight * 0.75, scrub: true, invalidateOnRefresh: true },
+            },
+          );
+        }
+        return () => gsap.set([picture, shift, terrain, badge].filter(Boolean), { clearProps: "clipPath,transform,inset,left,top,width,height" });
       });
     },
     { scope: root, dependencies: [ratio, photo.position] },
@@ -115,14 +148,32 @@ export function PosterHero({ title, sub, lede, facts, cta, phone, photo }: Props
 
   return (
     <section className="hero" ref={root} aria-labelledby="hero-title">
+      {/* The badge pinned on the poster; it flies into the header as the page scrolls */}
+      <div className="hero__badge" aria-hidden="true">
+        <Image src="/logo-badge.png" alt="" width={400} height={400} sizes="(max-width: 960px) 92px, 150px" preload />
+      </div>
       <div className="hero__stage">
         <div className="hero__ground" aria-hidden="true">
           {/* The real valley: 50 m contours around Embrun, Serre-Ponçon at its true shape, the base pinned */}
           <div className="hero__map">
             <div className="hero__terrain">
-              <div className="hero__water" />
-              <div className="hero__contours" />
-              <span className="hero__pin">Baratier</span>
+              <div className="hero__layer hero__contours" />
+              <div className="hero__layer hero__index" />
+              <div className="hero__layer hero__shore" />
+              <div className="hero__layer hero__river" />
+              <div className="hero__layer hero__water" />
+              <span className="hero__place hero__lakename" style={{ "--x": -284, "--y": 112 } as React.CSSProperties}>
+                Lac de Serre-Ponçon
+              </span>
+              <span className="hero__place hero__town" style={{ "--x": 142.9, "--y": -34.1 } as React.CSSProperties}>
+                <span>Embrun</span>
+              </span>
+              <span className="hero__place hero__pin" style={{ "--x": 128.0, "--y": 84.5 } as React.CSSProperties}>
+                <span>
+                  <b className="wordmark">Activités Nature</b>
+                  <small>{base}</small>
+                </span>
+              </span>
             </div>
           </div>
           <div className="hero__lake" />

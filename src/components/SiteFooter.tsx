@@ -65,8 +65,8 @@ export function SiteFooter({ site }: { site: Site }) {
         </div>
         <div className="site-footer__menu">
           <Link className="site-footer__brand" href={home}>
-            <Image src="/logo-160.png" alt="" width={56} height={56} />
-            <span>Activités Nature</span>
+            <Image src="/logo-badge.png" alt="" width={56} height={56} sizes="56px" />
+            <span className="wordmark">Activités Nature</span>
           </Link>
           <nav className="footer-nav" aria-label={t.nav.menu}>
             {links.map((l) => (
@@ -107,6 +107,12 @@ export function SiteFooter({ site }: { site: Site }) {
             </nav>
             <p>{t.footer.legal}</p>
             <p>{t.footer.credit}</p>
+            <p className="site-footer__made">
+              {t.footer.poweredBy}{" "}
+              <a className="link" href="https://facenordgraphisme.fr" target="_blank" rel="noopener">
+                Face Nord Graphisme
+              </a>
+            </p>
           </div>
         </div>
       </div>

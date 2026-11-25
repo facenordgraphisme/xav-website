@@ -43,6 +43,7 @@ export default async function Canyoning({ params }: PageProps<"/[lang]/canyoning
         cta={{ label: t.bookThis, href: "#reserver" }}
         phone={{ label: `${t.hero.call} ${facts.contact.phoneDisplay}`, href: `tel:${facts.contact.phoneIntl}` }}
         photo={site.photos.canyoning.hero}
+        base={t.hero.mapBase}
       />
       <Detail title={t.nav.canyoning} statement={p.statement} text={p.text} pics={site.photos.canyoning.detail} />
       <Outings site={site} only={["couleau", "fournel"]} />

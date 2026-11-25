@@ -79,8 +79,8 @@ export function SiteHeader({ lang, t, phone }: { lang: Locale; t: Copy["nav"]; p
     <header className="site-header">
       <div className="site-header__bar frame">
         <Link className="brand" href={home}>
-          <Image src="/logo-160.png" alt="" width={40} height={40} />
-          <span>Activités Nature</span>
+          <Image src="/logo-badge.png" alt="" width={52} height={52} sizes="52px" preload />
+          <span className="wordmark">Activités Nature</span>
         </Link>
         <nav className="site-nav" aria-label={t.menu}>
           {links.map((l) => (
@@ -123,7 +123,7 @@ export function SiteHeader({ lang, t, phone }: { lang: Locale; t: Copy["nav"]; p
         inert={!open}
       >
         <div className="menu-panel__top">
-          <span className="brand">Activités Nature</span>
+          <span className="brand"><span className="wordmark">Activités Nature</span></span>
           <button type="button" className="tool" onClick={() => setOpen(false)}>
             {t.close}
           </button>

@@ -42,6 +42,7 @@ const fr = {
   hero: {
     title: "Durance",
     sub: "Rafting & canyoning à Embrun",
+    mapBase: "La base · Baratier",
     lede: "Une demi-journée sur la Durance ou dans les canyons des Écrins, avec Xavier et Patrick, moniteurs diplômés d'État.",
     facts: [
       { label: "Durée", value: "2 h 30" },
@@ -259,7 +260,8 @@ const fr = {
     contact: "Contact",
     follow: "Suivre",
     legal: "© 2026 Activités Nature · Rafting et canyoning entre Embrun et Serre-Ponçon",
-    credit: "Photo du lac : « Lake of Serre-Ponçon from D900 2 » par kallerna, CC BY-SA 4.0, via Wikimedia Commons. Toutes les autres photos : Activités Nature. Relief de la carte : Terrain Tiles (Mapzen, AWS), dont EU-DEM, données Copernicus.",
+    credit: "Photo du lac : « Lake of Serre-Ponçon from D900 2 » par kallerna, CC BY-SA 4.0, via Wikimedia Commons. Toutes les autres photos : Activités Nature. Carte : relief Terrain Tiles (Mapzen, AWS), dont EU-DEM, données Copernicus ; lac et Durance © les contributeurs d'OpenStreetMap.",
+    poweredBy: "Propulsé par",
     photoAlt: "Un raft dans les rapides de la Durance, le moniteur à l'arrière",
   },
   raftingPage: {
@@ -318,6 +320,7 @@ const en: Copy = {
   hero: {
     title: "Durance",
     sub: "Rafting & canyoning, Embrun",
+    mapBase: "Our base · Baratier",
     lede: "Half a day on the Durance river or in the canyons of the Écrins, with Xavier and Patrick, state-certified instructors.",
     facts: [
       { label: "Duration", value: "2.5 hrs" },
@@ -518,7 +521,8 @@ const en: Copy = {
     contact: "Contact",
     follow: "Follow",
     legal: "© 2026 Activités Nature · Rafting and canyoning between Embrun and Serre-Ponçon",
-    credit: "Lake photo: “Lake of Serre-Ponçon from D900 2” by kallerna, CC BY-SA 4.0, via Wikimedia Commons. All other photos: Activités Nature. Map relief: Terrain Tiles (Mapzen, AWS), including EU-DEM, Copernicus data.",
+    credit: "Lake photo: “Lake of Serre-Ponçon from D900 2” by kallerna, CC BY-SA 4.0, via Wikimedia Commons. All other photos: Activités Nature. Map: relief from Terrain Tiles (Mapzen, AWS), including EU-DEM, Copernicus data; lake and Durance © OpenStreetMap contributors.",
+    poweredBy: "Powered by",
     photoAlt: "A raft in the Durance rapids, the instructor at the back",
   },
   raftingPage: {

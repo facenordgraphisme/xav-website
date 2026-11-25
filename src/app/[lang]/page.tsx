@@ -26,6 +26,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         cta={{ label: t.hero.cta, href: "#reserver" }}
         phone={{ label: `${t.hero.call} ${facts.contact.phoneDisplay}`, href: `tel:${facts.contact.phoneIntl}` }}
         photo={site.photos.home.hero}
+        base={t.hero.mapBase}
       />
       <Outings site={site} />
       <Ritual site={site} />

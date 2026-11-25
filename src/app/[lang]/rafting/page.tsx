@@ -42,6 +42,7 @@ export default async function Rafting({ params }: PageProps<"/[lang]/rafting">) 
         cta={{ label: t.bookThis, href: facts.booking.rafting ?? "#reserver", outplanners: Boolean(facts.booking.rafting) }}
         phone={{ label: `${t.hero.call} ${facts.contact.phoneDisplay}`, href: `tel:${facts.contact.phoneIntl}` }}
         photo={site.photos.rafting.hero}
+        base={t.hero.mapBase}
       />
       <Detail title={t.outings.rafting.name} statement={p.statement} text={p.text} pics={site.photos.rafting.detail} />
       <Outings site={site} only={["rafting"]} />

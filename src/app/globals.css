@@ -183,8 +183,13 @@ p { text-wrap: pretty; }
 /* ---------- Header ---------- */
 .site-header { position: sticky; top: 0; z-index: 50; background: var(--sky); color: var(--sky-ink); }
 .site-header__bar { height: var(--header-h); display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); }
-.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: var(--step-body); letter-spacing: -0.01em; margin-right: auto; }
-.brand img { width: 40px; height: 40px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; min-width: 0; }
+.brand img { width: 52px; height: 52px; flex: none; }
+/* The name: Big Shoulders at its poster optical size, set in tracked capitals */
+.wordmark {
+  font-family: var(--font-mark), var(--font); font-weight: 900; font-variation-settings: "opsz" 72;
+  font-size: 22px; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+}
 .site-nav { display: flex; gap: clamp(14px, 1.8vw, 28px); font-size: var(--step-small); font-weight: 600; }
 .site-nav a { position: relative; text-decoration: none; padding-block: 8px; }
 .site-nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform var(--t-ui) var(--ease-out); }
@@ -233,14 +238,17 @@ html.menu-open { overflow: clip; }
 
 
 /* ---------- Poster hero ---------- */
-.hero { position: relative; height: 200svh; }
-.hero__stage {
+/* The window's geometry lives on .hero so the badge, outside the stage, can read it too */
+.hero {
+  position: relative; height: 200svh;
   --stage-h: calc(100svh - var(--header-h));
   --win-w: min(27vw, calc((var(--stage-h) - 14svh) * 0.8));
   --win-h: calc(var(--win-w) * 1.25);
   --win-top: calc((var(--stage-h) - var(--win-h)) * 0.4);
   --win-right: calc(var(--margin) + 5vw);
   --win-shift: calc(50vw - var(--win-right) - var(--win-w) / 2);
+}
+.hero__stage {
   position: sticky; top: var(--header-h); height: var(--stage-h); overflow: clip; background: var(--sky); color: var(--sky-ink);
 }
 .hero__ground { position: absolute; inset: 0; pointer-events: none; display: grid; grid-template-rows: minmax(0, 1fr) 31svh; }
@@ -251,21 +259,61 @@ html.menu-open { overflow: clip; }
 .hero__map { position: relative; overflow: clip; container-type: size; }
 .hero__terrain {
   --k: max(100cqw / 1280, 100cqh / 768);
-  --pin-x: calc(50% + 93 * var(--k));
-  --pin-y: calc(50% + 89 * var(--k));
+  --pin-x: calc(50% + 128.0 * var(--k));
+  --pin-y: calc(50% + 84.5 * var(--k));
   position: absolute; inset: 0; transform-origin: var(--pin-x) var(--pin-y);
-  /* Its own layer, drawn once: without it phones redraw the 288 KB contour mask on every scroll frame */
+  /* Its own layer, drawn once: without it phones redraw the contour masks on every scroll frame */
   will-change: transform;
 }
-.hero__water, .hero__contours { position: absolute; inset: 0; mask: center / cover no-repeat; -webkit-mask: center / cover no-repeat; }
-.hero__water { background: var(--lake); mask-image: url(/images/lieu/courbes-lac.svg); -webkit-mask-image: url(/images/lieu/courbes-lac.svg); }
+/* Layers drawn from real data (scripts/carte): 50 m contours, 250 m index contours, the shore's
+   water lines, the Durance and Serre-Ponçon. Each is one colour through an SVG mask, so both themes work. */
+.hero__layer { position: absolute; inset: 0; mask: center / cover no-repeat; -webkit-mask: center / cover no-repeat; }
 .hero__contours { background: var(--ridge); opacity: var(--contour-strength); mask-image: url(/images/lieu/courbes.svg); -webkit-mask-image: url(/images/lieu/courbes.svg); }
-.hero__pin {
-  position: absolute; left: var(--pin-x); top: var(--pin-y); translate: -7px -50%;
-  display: flex; align-items: center; gap: 8px;
-  font-size: var(--step-small); font-weight: 800; letter-spacing: 0.02em; color: var(--sky-ink);
+.hero__index { background: color-mix(in srgb, var(--ridge) 70%, var(--sky-ink)); opacity: var(--contour-strength); mask-image: url(/images/lieu/courbes-maitresses.svg); -webkit-mask-image: url(/images/lieu/courbes-maitresses.svg); }
+.hero__shore { background: var(--lake); mask-image: url(/images/lieu/rive.svg); -webkit-mask-image: url(/images/lieu/rive.svg); }
+.hero__river { background: var(--lake); mask-image: url(/images/lieu/durance.svg); -webkit-mask-image: url(/images/lieu/durance.svg); }
+.hero__water { background: var(--lake); mask-image: url(/images/lieu/lac.svg); -webkit-mask-image: url(/images/lieu/lac.svg); }
+
+/* Places, in map units from the centre (places.json from scripts/carte) */
+.hero__place { position: absolute; left: calc(50% + var(--x) * var(--k)); top: calc(50% + var(--y) * var(--k)); width: 0; height: 0; color: var(--sky-ink); }
+.hero__place > span { position: absolute; right: 12px; top: 0; translate: 0 -50%; text-align: right; white-space: nowrap; line-height: 1.05; }
+.hero__place::before { content: ""; position: absolute; left: 0; top: 0; translate: -50% -50%; border-radius: 50%; }
+.hero__town::before { width: 7px; height: 7px; background: var(--sky-ink); }
+.hero__town > span { right: 9px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; }
+.hero__pin::before { width: 14px; height: 14px; background: var(--accent); box-shadow: 0 0 0 2px var(--sky-ink), 0 0 0 7px color-mix(in srgb, var(--accent) 30%, transparent); }
+.hero__pin b { display: block; font-size: 19px; }
+.hero__pin small { display: block; margin-top: 3px; font-size: 12px; font-weight: 600; }
+.hero__lakename {
+  width: auto; height: auto; translate: -50% -50%; rotate: -20deg; white-space: nowrap;
+  font-size: 13px; font-style: italic; font-weight: 600; letter-spacing: 0.14em; color: color-mix(in srgb, var(--lake-ink) 72%, var(--lake));
 }
-.hero__pin::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px var(--sky-ink); }
+.hero__lakename::before { content: none; }
+@media (max-width: 960px) { .hero__lakename { display: none; } }
+
+/* The badge: pinned on the window's top-right corner like a sticker, then flown into the
+   header by PosterHero. It sits outside the sticky stage (its own stacking context) so it can
+   rise above the header; fixed once scripts run. */
+.hero__badge {
+  --badge: clamp(104px, 9vw, 150px);
+  position: absolute; z-index: 3; width: var(--badge); height: var(--badge); pointer-events: none;
+  left: calc(100vw - var(--win-right) - var(--badge) * 0.55);
+  top: calc(var(--win-top) - var(--badge) * 0.45);
+  transform: rotate(-8deg);
+}
+.hero__badge img { width: 100%; height: 100%; filter: drop-shadow(0 6px 14px rgb(9 30 44 / 0.2)); }
+.js .hero__badge { position: fixed; z-index: 55; top: calc(var(--header-h) + var(--win-top) - var(--badge) * 0.45); will-change: transform; }
+/* The mobile menu lives inside the header, under the badge: hide the badge while it is open */
+html.menu-open .hero__badge { visibility: hidden; }
+/* While the badge is on the page, it is the header's logo */
+html:has(.hero__badge) .site-header .brand img { visibility: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .hero__badge { display: none; }
+  html:has(.hero__badge) .site-header .brand img { visibility: visible; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero__badge { animation: badge-in 800ms var(--ease-expo) 420ms backwards; }
+}
+@keyframes badge-in { from { opacity: 0; scale: 0.6; } }
 
 /* The window: a full-bleed picture clipped to a 4:5 opening, its subject centred in the opening */
 .hero__picture {
@@ -306,10 +354,10 @@ html.menu-open { overflow: clip; }
 @keyframes settle { to { transform: none; } }
 
 @media (max-width: 960px) {
-  .hero { height: 170svh; }
+  .hero { height: 170svh; --win-h: min(42svh, 84vw); --win-w: calc(var(--win-h) * 0.8); --win-right: calc((100vw - var(--win-w)) / 2); --win-top: 19svh; --win-shift: 0px; }
   .hero__ground { grid-template-rows: minmax(0, 1fr) 36svh; }
-  .hero__stage { --win-h: min(42svh, 84vw); --win-w: calc(var(--win-h) * 0.8); --win-right: calc((100vw - var(--win-w)) / 2); --win-top: 19svh; --win-shift: 0px; }
   .hero__title { top: 3.5svh; font-size: clamp(52px, 14.6vw, 120px); }
+  .hero__badge { --badge: 92px; }
   .hero__title .sub { font-size: clamp(15px, 4.4vw, 28px); }
   .hero__band { width: auto; right: var(--margin); height: 36svh; grid-template-columns: 1fr; gap: 12px; align-content: end; padding-bottom: max(16px, env(safe-area-inset-bottom, 0px)); }
   .hero__lede { font-size: var(--step-body); grid-row: auto; }
@@ -556,7 +604,8 @@ html.menu-open { overflow: clip; }
 .site-footer__photo { position: relative; overflow: clip; }
 .site-footer__photo img { object-fit: cover; object-position: 50% 30%; }
 .site-footer__menu { background: var(--sun); color: var(--sun-ink); padding: 80px max(var(--margin), env(safe-area-inset-right, 0px)) 24px clamp(24px, 8vw, 140px); display: flex; flex-direction: column; gap: 56px; }
-.site-footer__brand { display: flex; align-items: center; gap: 12px; font-weight: 800; text-decoration: none; width: fit-content; }
+.site-footer__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; width: fit-content; }
+.site-footer__brand .wordmark { font-size: 24px; }
 .site-footer__brand img { width: 56px; height: 56px; }
 .footer-nav { display: grid; gap: 14px; }
 .footer-nav a { font-size: var(--step-title); font-weight: 900; font-stretch: 112%; letter-spacing: -0.03em; line-height: 1.05; text-decoration: none; width: fit-content; transition: transform var(--t-ui) var(--ease-out), opacity var(--t-hover) ease; }
@@ -567,6 +616,7 @@ html.menu-open { overflow: clip; }
 .site-footer__blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; font-size: var(--step-small); line-height: 1.6; }
 .site-footer__blocks h2 { font-size: var(--step-small); font-weight: 800; letter-spacing: 0; margin-bottom: 6px; }
 .site-footer__legal { margin-top: auto; font-size: var(--step-small); font-weight: 600; display: grid; gap: 6px; }
+.site-footer__made { font-weight: 600; }
 .site-footer__legal-nav { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-bottom: 8px; }
 .site-footer__legal p + p { font-weight: 500; max-width: 60ch; }
 @media (max-width: 860px) {

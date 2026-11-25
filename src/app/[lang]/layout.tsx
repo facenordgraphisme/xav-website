@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo } from "next/font/google";
+import { Archivo, Big_Shoulders } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, locales } from "@/content/copy";
 import { getSite } from "@/content/getSite";
@@ -17,6 +17,15 @@ const archivo = Archivo({
   axes: ["wdth"],
   variable: "--font-archivo",
   display: "swap",
+});
+
+// The name "ACTIVITÉS NATURE" only: a tall poster cut, set at its display optical size
+const shoulders = Big_Shoulders({
+  subsets: ["latin"],
+  axes: ["opsz"],
+  variable: "--font-mark",
+  display: "swap",
+  adjustFontFallback: false,
 });
 
 export async function generateStaticParams() {
@@ -63,7 +72,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   const { contact } = site.facts;
 
   return (
-    <html lang={lang} className={archivo.variable} suppressHydrationWarning>
+    <html lang={lang} className={`${archivo.variable} ${shoulders.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: boot }} />
         <JsonLd data={businessSchema(site)} />
