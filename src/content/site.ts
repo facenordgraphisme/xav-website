@@ -2,10 +2,11 @@
 // Prices are SAMPLES until Xavier and Patrick confirm them.
 
 /**
- * The address Google should index (canonical, sitemap, structured data). The domain
- * is activités-nature.fr, written in its ASCII form: Vercel redirects the bare domain to www.
+ * The address Google should index (canonical, sitemap, structured data). Every other
+ * address (activités-nature.fr with the accent, the bare domain, xav-website.vercel.app)
+ * redirects here with a 308, set in Vercel › Domains.
  */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.xn--activits-nature-hnb.fr").replace(/\/$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.activites-nature.fr").replace(/\/$/, "");
 
 export const contact = {
   phoneDisplay: "07 66 01 05 09",
